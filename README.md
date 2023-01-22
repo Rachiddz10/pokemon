@@ -1,10 +1,17 @@
 # POCA 2023
 
+## Prof
+
+- ABBAD bilal
+
 ## Group
 
-- XXX
-- YYY
-- ZZZ
+- AJIB safae
+- BENHAMMOU mohammed rachid
+- BENMALEK ouiame
+- CHAU julien
+- HAMDI amal 
+- MOKHTARI nouhaila
 
 ## Prerequisite
 
