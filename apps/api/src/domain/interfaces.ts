@@ -11,7 +11,7 @@ export interface IPokemonRepository {
     name: string;
     ability: string;
     force: number;
-    trainer: Trainer;
+    //trainer: Trainer;
   }): Promise<Pokemon>;
 
   findAll(): Promise<Pokemon[]>;

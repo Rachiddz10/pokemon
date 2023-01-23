@@ -9,5 +9,5 @@ export type Pokemon = {
   name: string;
   ability: string;
   force: number;
-  trainer: Trainer;
+  //trainer: Trainer;
 };

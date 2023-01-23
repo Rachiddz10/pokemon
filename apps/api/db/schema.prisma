@@ -15,3 +15,11 @@ model Trainer {
   name  String
   gender String
 }
+
+model Pokemon {
+  id    Int     @id @default(autoincrement())
+  name  String
+  ability String
+  force Int
+  //trainer Trainer
+}
