@@ -1,5 +1,5 @@
-import { Pokemon } from "./entities";
-import { IPokemonRepository } from "./interfaces";
+import { Pokemon } from "../entities";
+import { IPokemonRepository } from "../interfaces";
 
 export class CreatePokemonUsecase {
   private pokemonRepository: IPokemonRepository;

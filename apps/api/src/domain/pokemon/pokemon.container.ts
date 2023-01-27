@@ -1,4 +1,4 @@
-import { PokemonRepository } from "../infrastructure/pokemon.repository";
+import { PokemonRepository } from "../../infrastructure/pokemon.repository";
 import { CreatePokemonUsecase } from "./create-pokemon.usecase";
 import { GetAllPokemonUsecase } from "./get-all-pokemons.usecase";
 

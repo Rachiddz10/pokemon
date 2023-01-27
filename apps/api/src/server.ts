@@ -1,8 +1,8 @@
 import fastify, { FastifyInstance } from "fastify";
 import { registerPokemonRoutes } from "./api/pokemon.api";
 import { registerTrainerRoutes } from "./api/trainer.api";
-import { initPokemonContainer } from "./domain/pokemon.container";
-import { initTrainerContainer } from "./domain/trainer.container";
+import { initPokemonContainer } from "./domain/pokemon/pokemon.container";
+import { initTrainerContainer } from "./domain/trainer/trainer.container";
 
 const server: FastifyInstance = fastify({
   logger: {
