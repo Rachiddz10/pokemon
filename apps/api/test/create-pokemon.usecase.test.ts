@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
-import { CreatePokemonUsecase } from "../src/domain/create-pokemon.usecase";
+import { CreatePokemonUsecase } from "../src/domain/pokemon/create-pokemon.usecase";
 import { Pokemon } from "../src/domain/entities";
 
 describe("Create Pokemon Usecase - test", () => {

@@ -1,5 +1,5 @@
 import {afterEach, describe, expect, test, vi} from 'vitest'
-import {CreateTrainerUsecase} from "../src/domain/create-trainer.usecase";
+import {CreateTrainerUsecase} from "../src/domain/trainer/create-trainer.usecase";
 import {Trainer} from '../src/domain/entities';
 
 describe('Create Trainer Usecase - test', () => {
