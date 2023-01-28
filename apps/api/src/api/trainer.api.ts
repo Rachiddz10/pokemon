@@ -11,6 +11,8 @@ export const registerTrainerRoutes = (
     handler: async (_request, reply) => {
       const trainers = await container.getAllTrainersUsecase.execute();
       reply.status(200).send(trainers);
+      reply.header('Access-Control-Allow-Origin', '*');
+      reply.header('Access-Control-Allow-Headers', '*');
     },
   });
 
