@@ -9,10 +9,12 @@ export const registerPokemonRoutes = (
     method: "GET",
     url: "/pokemons",
     handler: async (_request, reply) => {  
-      const pokemons = await container.getAllPokemonUsecase.execute();
-      reply.status(200).send(pokemons);
       reply.header('Access-Control-Allow-Origin', '*');
       reply.header('Access-Control-Allow-Headers', '*');
+      reply.header('mode', 'no-cors');
+      const pokemons = await container.getAllPokemonUsecase.execute();
+      reply.status(200).send(pokemons);
+
  
     },
   });
