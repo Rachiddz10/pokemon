@@ -5,15 +5,27 @@ import { prisma } from "../../db";
 export class PokemonRepository implements IPokemonRepository {
   async create(pokemon: {
     name: string;
-    ability: string;
-    force: number;
+    hp: number;
+    atk: number;
+    def: number;
+    atkspe: number;
+    defspe: number;
+    speed: number;
+    type: string;
+    image: string;
     //     trainer: Trainer;
   }): Promise<Pokemon> {
     const newPokemon = await prisma.pokemon.create({
       data: {
         name: pokemon.name,
-        ability: pokemon.ability,
-        force: pokemon.force,
+        hp: pokemon.hp,
+        atk: pokemon.atk,
+        def: pokemon.def,
+        atkspe: pokemon.atkspe,
+        defspe: pokemon.defspe,
+        speed: pokemon.speed,
+        type: pokemon.type,
+        image: pokemon.image,
         // trainer: pokemon.trainer,
       },
     });

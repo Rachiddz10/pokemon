@@ -10,14 +10,26 @@ export class CreatePokemonUsecase {
 
   async excute(command: {
     name: string;
-    ability: string;
-    force: number;
+    hp: number;
+    atk: number;
+    def: number;
+    atkspe: number;
+    defspe: number;
+    speed: number;
+    type: string;
+    image: string;
   }): Promise<Pokemon> {
     // create a new pokemon in db
     const newPokemon = await this.pokemonRepository.create({
       name: command.name,
-      ability: command.ability,
-      force: command.force,
+      hp: command.hp,
+      atk: command.atk,
+      def: command.def,
+      atkspe: command.atkspe,
+      defspe: command.defspe,
+      speed: command.speed,
+      type: command.type,
+      image: command.image,
     });
     return newPokemon;
   }

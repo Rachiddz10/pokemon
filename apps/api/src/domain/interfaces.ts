@@ -9,8 +9,14 @@ export interface ITrainerRepository {
 export interface IPokemonRepository {
   create(pokemon: {
     name: string;
-    ability: string;
-    force: number;
+    hp: number;
+    atk: number;
+    def: number;
+    atkspe: number;
+    defspe: number;
+    speed: number;
+    type: string;
+    image: string;
     //trainer: Trainer;
   }): Promise<Pokemon>;
 

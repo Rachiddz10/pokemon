@@ -14,12 +14,23 @@ model Trainer {
   id    Int     @id @default(autoincrement())
   name  String
   gender String
+  pokemons Pokemon[]
 }
+
+
+// default added to avoid migrate errors
 
 model Pokemon {
   id    Int     @id @default(autoincrement())
   name  String
-  ability String
-  force Int
-  //trainer Trainer
+  hp Int @default(0)
+  atk Int @default(0)
+  def Int @default(0)
+  atkspe Int @default(0)
+  defspe Int @default(0)
+  speed Int @default(0)
+  type String @default("")
+  image String @default("")
+  trainer Trainer @relation(fields: [trainerId], references: [id])
+  trainerId Int @default(1)
 }
