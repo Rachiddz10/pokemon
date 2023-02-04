@@ -15,15 +15,12 @@ import AddPokemon from './Componenets/AddPokemon';
     <Router>
       <div>
       <NavBar/>
-
         {/* 👇️ Wrap your Route components in a Routes component */}
         <Routes>
           <Route path="/Trainers" element={<AllTrainers />} />
           <Route path="/Pokemons" element={<AllPokemons />} />
           <Route path="/AddTrainer" element={<AddTrainer />} />
           <Route path="/AddPokemon" element={<AddPokemon />} />
-
-
 
           {/* 👇️ handle dynamic path */}
           {/**          <Route path="/users/:userId" element={<AllPokemons />} /> */}
