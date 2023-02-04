@@ -1,13 +1,28 @@
 stages:
+  - build
   - deploy
 
-deploy-railway:
-  stage: deploy
-  image: ubuntu
-  only:
-    - pushes
-    - main
+build:
+  stage: build
   script:
-    - apt-get update && apt-get install -y curl
-    - curl -fsSL https://railway.app/install.sh | sh
-    - railway up --service=$RAILWAY_SERVICE_NAME -d
+    - cd apps/api
+    - yarn install
+    - yarn db:start
+    - yarn db:migrate
+    - yarn build
+    - yarn start
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying to railway server"
+    - scp -o StrictHostKeyChecking=no -o User=user -o Port=22 -r dist/* user@railway_server_ip:apps/api
+  only:
+    - master
+  environment:
+    name: railway
+    url: http://railway_server_ip
+  variables:
+    GIT_STRATEGY: clone
+    GIT_CLONE_EXTRA_FLAGS: "--depth=1"
+    GIT_CLONE_ATTEMPTS: 3
+    GITLAB_TOKEN: $CI_JOB_TOKEN
