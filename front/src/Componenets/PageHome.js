@@ -8,15 +8,11 @@ export default class PageHome extends Component{
  
       }
       async componentDidMount() {
- 
-    }
-    
-      
+    }     
       render () {
          return (
           <div>
-            
-       PAGE HOME
+
           </div>
         );
       }
