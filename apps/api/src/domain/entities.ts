@@ -7,7 +7,12 @@ export type Trainer = {
 export type Pokemon = {
   id: number;
   name: string;
-  ability: string;
-  force: number;
-  //trainer: Trainer;
+  hp: number;
+  atk: number;
+  def: number;
+  atkspe: number;
+  defspe: number;
+  speed: number;
+  type: string;
+  image: string;
 };
