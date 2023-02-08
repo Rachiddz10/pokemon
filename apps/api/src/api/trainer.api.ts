@@ -50,4 +50,3 @@ reply.status(200).send(trainer);
 },
 });
 };
-
