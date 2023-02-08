@@ -3,6 +3,7 @@ import { registerPokemonRoutes } from "./api/pokemon.api";
 import { registerTrainerRoutes } from "./api/trainer.api";
 import { initPokemonContainer } from "./domain/pokemon/pokemon.container";
 import { initTrainerContainer } from "./domain/trainer/trainer.container";
+import cors from "@fastify/cors";
 
 const server: FastifyInstance = fastify({
   logger: {
@@ -18,6 +19,10 @@ const server: FastifyInstance = fastify({
 // Run the server!
 const start = async () => {
   try {
+    server.register(cors, {
+      origin: true,
+    });
+
     const pokemonContainer = initPokemonContainer();
     const trainerContainer = initTrainerContainer();
     registerTrainerRoutes(server, trainerContainer);
