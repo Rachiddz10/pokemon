@@ -5,10 +5,11 @@ import {Trainer} from '../src/domain/entities';
 describe('Create Trainer Usecase - test', () => {
     const trainerRepositoryMock = {
         create: vi.fn(),
-        findAll: vi.fn()
+        findAll: vi.fn(),
+        update : vi.fn()
     }
 
-    const createTrainerUsecase = new CreateTrainerUsecase(trainerRepositoryMock)
+    const createTrainerUsecase = new CreateTrainerUsecase(trainerRepositoryMock);
 
     afterEach(() => {
         vi.restoreAllMocks()

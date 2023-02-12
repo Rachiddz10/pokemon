@@ -2,8 +2,8 @@ import { Trainer, Pokemon } from "./entities";
 
 export interface ITrainerRepository {
   create(trainer: { name: string; gender: string }): Promise<Trainer>;
-
   findAll(): Promise<Trainer[]>;
+  update(id: number, trainer: { name?: string; gender?: string }): Promise<Trainer>;
 }
 
 export interface IPokemonRepository {
