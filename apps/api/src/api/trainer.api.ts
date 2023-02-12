@@ -75,9 +75,7 @@ server.route<{
       },
     },
     handler: async (request, reply) => {
-     const r = request.params as { id: string };
-      const id = parseInt(r.id);
-      //const { id } = request.params as { id: number };
+      const { id } = request.params as { id: number };
       const { name, gender } = request.body;
       reply.header('Access-Control-Allow-Origin', '*');
       reply.header('Access-Control-Allow-Headers', '*');
