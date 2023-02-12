@@ -21,4 +21,14 @@ export interface IPokemonRepository {
   }): Promise<Pokemon>;
 
   findAll(): Promise<Pokemon[]>;
+  update(id: number, pokemon: { 
+    name: string,
+    hp: number,
+    atk: number,
+    def: number,
+    atkspe: number,
+    defspe: number,
+    speed: number,
+    type: string,
+    image : string }): Promise<Pokemon>;
 }
