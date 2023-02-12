@@ -8,7 +8,8 @@ constructor(pokemonRepository: IPokemonRepository) {
 this.pokemonRepository = pokemonRepository;
 }
 
-async execute(id: number, command: { name: string,
+async execute(id: number, command: { 
+name: string,
 hp: number,
 atk: number,
 def: number,
