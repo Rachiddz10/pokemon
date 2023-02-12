@@ -76,4 +76,18 @@ export const registerPokemonRoutes = (
       reply.status(200).send(pokemon);
     },
   });
+
+
+
+  server.route<{
+  }>({
+    method: "GET",
+    url: "/pokemons/:name",
+
+    handler: async (request, reply) => {
+      const { name } = request.params as {name : string};
+      const pokemon = await container.findPokemonsUsecase.execute(name);
+      reply.status(200).send(pokemon);
+    },
+  });
 };
