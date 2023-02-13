@@ -5,37 +5,34 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+ 
 function NavBar() {
-  return (
-    <Navbar bg="light" expand="lg">
-    <Container fluid>
-      <Navbar.Brand href="/">Home</Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbarScroll" />
-      <Navbar.Collapse id="navbarScroll">
-        <Nav
-          className="me-auto my-2 my-lg-0"
-          style={{ maxHeight: '100px' }}
-          navbarScroll
-        >
-           <Nav.Link href="Trainers">Trainers</Nav.Link>
-          <Nav.Link href="Pokemons">Pokemons</Nav.Link>
+  const mystyle = { minWidth: '25%' }; 
 
-          <NavDropdown title="ADD" id="navbarScrollingDropdown">
-             <NavDropdown.Item href="AddTrainer">
-            Add Trainers
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="AddPokemon">
-            Add Pokemons
-            </NavDropdown.Item>
-          </NavDropdown>
-        
-        </Nav>
-      
-      </Navbar.Collapse>
-    </Container>
-  </Navbar>
-    
+  const myclass = " btn  btn-outline-info rounded-pill mx-3 text-info font-weight-bold"
+  return (
+
+    <Navbar bg="withe" expand="lg" className='my-2 ml-5'>
+      <Container fluid>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav className="me-auto mx-5  mh-100" navbarScroll>
+            <Nav.Link href="/" style={mystyle} className={myclass}>Home</Nav.Link>
+
+            <Nav.Link href="Trainers" style={mystyle} className={myclass}>Trainers</Nav.Link>
+            <Nav.Link href="Pokemons" style={mystyle} className={myclass}>Pokemons</Nav.Link>
+
+            <Nav.Link href="AddTrainer" style={mystyle} className={myclass}>   Add Trainers</Nav.Link>
+            <Nav.Link href="AddPokemon" style={mystyle} className={myclass}> Add Pokemons</Nav.Link>
+
+            <Nav.Link href="/" style={mystyle} className={myclass}>   Battle</Nav.Link>
+
+          </Nav>
+
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+
   );
 }
 
