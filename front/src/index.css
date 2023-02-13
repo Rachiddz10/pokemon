@@ -1,0 +1,114 @@
+.image-container {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index:1;
+ }
+
+ .box1 {
+    background-color: rgb(224, 245, 240);
+    color: #070704;
+    opacity: .5;
+    height: 600px;
+    border-radius: 10px;
+    display: flex;
+    animation: shine 10s infinite;
+    box-shadow:
+    inset 60px 0 120px rgb(57, 158, 241),  /* left magenta */
+    inset -60px 0 120px rgb(52, 118, 231), /* right cyan */
+    0 0 50px #fff,            /* outer white */
+    -10px 0 80px rgb(67, 99, 120),        /* outer left magenta */
+    10px 0 80px rgb(86, 117, 117);  
+}
+
+.center {
+    margin: auto;
+    width: 60%;
+    top: -100px;
+  }
+ 
+#leftbox {
+    float:left;
+    width:25%;
+    height:250px;
+    position: relative;
+}
+#middlebox{
+    float:left;
+    width:50%;
+    height:280px;
+    z-index:-1;
+}
+
+@keyframes shine{
+  10% {
+    opacity: 1;
+    top: -30%;
+    left: -30%;
+    transition-property: left, top, opacity;
+    transition-duration: 0.7s, 0.7s, 0.15s;
+    transition-timing-function: ease;
+  }
+  100% {
+    opacity: 0.5;
+    top: -30%;
+    left: -30%;
+    transition-property: left, top, opacity;
+  }
+}
+
+#rightbox{
+    float:right;
+    width: 25%;
+    height:250px;
+    position: relative;
+    z-index: 100;
+}
+.pikachu{
+    position: absolute;
+    top: -130px;
+    right: 20px;
+    left: -400px;
+    height: 1000px;
+}
+
+/* Hide the scroll bars */
+body {
+    overflow-y: hidden;
+  }
+  
+  .slides {
+    /* We set the scroll snapping */
+    scroll-snap-type: x mandatory;
+    /* Necessary for mobile scrolling */
+    -webkit-overflow-scrolling: touch;
+    /* For layout purposes */
+    display: flex;
+    /* To allow horizontal scrolling */
+    overflow-x: scroll;
+    align-items: center;
+    border-radius: 50px;
+  }
+  
+  section {
+    /* For styling purposes */
+    min-width: 50vw;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Set where the snapping should happen */
+    scroll-snap-align: start;
+    border-radius: 50px;
+  }
+  
+  .stats {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stats div {
+    text-align: center;
+    width: 25%;
+  }

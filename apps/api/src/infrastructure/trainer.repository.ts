@@ -19,4 +19,17 @@ export class TrainerRepository implements ITrainerRepository {
 
     return trainers;
   }
+
+  async update(id: number, trainer: { name?: string; gender?: string }): Promise<Trainer> {
+    const updatedTrainer = await prisma.trainer.update({
+      where: { id },
+      data: {
+        name: trainer.name,
+        gender: trainer.gender,
+      },
+    });
+
+    return updatedTrainer;
+}
+
 }

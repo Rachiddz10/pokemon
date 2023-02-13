@@ -49,4 +49,42 @@ gender,
 reply.status(200).send(trainer);
 },
 });
-};
+
+
+
+server.route<{
+    Body: { id: number; name: string; gender: string };
+  }>({
+    method: "PUT",
+    url: "/trainers/:id",
+    schema: {
+      params: {
+        type: "object",
+        properties: {
+          id: { type: "number" },
+        },
+        required: ["id"],
+      },
+      body: {
+        type: "object",
+        properties: {
+          name: { type: "string" },
+          gender: { type: "string" },
+        },
+        required: ["name", "gender"],
+      },
+    },
+    handler: async (request, reply) => {
+      const { id } = request.params as { id: number };
+      const { name, gender } = request.body;
+      reply.header('Access-Control-Allow-Origin', '*');
+      reply.header('Access-Control-Allow-Headers', '*');
+      reply.header('mode', 'no-cors');
+      const trainer = await container.updateTrainerUsecase.execute(id, {
+        name,
+        gender,
+      });
+      reply.status(200).send(trainer);
+    },
+  });
+}  
