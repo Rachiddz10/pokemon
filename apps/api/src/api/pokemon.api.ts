@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyRequest } from "fastify";
 import { PokemonContainer } from "../domain/pokemon/pokemon.container";
 
 export const registerPokemonRoutes = (
@@ -77,21 +77,20 @@ export const registerPokemonRoutes = (
     },
   });
 
-  server.route<{
-  }>({
+  server.route<{}>({
     method: "GET",
     url: "/pokemons/:name",
 
     handler: async (request, reply) => {
-      const { name } = request.params as {name : string};
+      const { name } = request.params as { name: string };
       const pokemon = await container.findPokemonsUsecase.execute(name);
       reply.status(200).send(pokemon);
     },
   });
-};
 
   server.route<{
-    Body: { id: number; 
+    Body: {
+      id: number;
       name: string;
       hp: number;
       atk: number;
@@ -100,7 +99,8 @@ export const registerPokemonRoutes = (
       defspe: number;
       speed: number;
       type: string;
-      image: string; };
+      image: string;
+    };
   }>({
     method: "PUT",
     url: "/pokemons/:id",
@@ -126,27 +126,49 @@ export const registerPokemonRoutes = (
           image: { type: "string" },
         },
         required: [
-        "name",
-        "hp",
-        "atk",
-        "def",
-        "atkspe",
-        "defspe",
-        "speed",
-        "type",
-        "image",],
+          "name",
+          "hp",
+          "atk",
+          "def",
+          "atkspe",
+          "defspe",
+          "speed",
+          "type",
+          "image",
+        ],
       },
     },
     handler: async (request, reply) => {
       const { id } = request.params as { id: number };
-      const { name, hp, atk, def, atkspe, defspe, speed, type, image  } = request.body;
-      reply.header('Access-Control-Allow-Origin', '*');
-      reply.header('Access-Control-Allow-Headers', '*');
-      reply.header('mode', 'no-cors');
+      const { name, hp, atk, def, atkspe, defspe, speed, type, image } =
+        request.body;
+      reply.header("Access-Control-Allow-Origin", "*");
+      reply.header("Access-Control-Allow-Headers", "*");
+      reply.header("mode", "no-cors");
       const trainer = await container.updatePokemonUsecase.execute(id, {
-        name, hp, atk, def, atkspe, defspe, speed, type, image,
+        name,
+        hp,
+        atk,
+        def,
+        atkspe,
+        defspe,
+        speed,
+        type,
+        image,
       });
       reply.status(200).send(trainer);
     },
   });
-}  
+  server.route({
+    method: "DELETE",
+    url: "/pokemons/:id",
+
+    handler: async (request: FastifyRequest, reply) => {
+      const r = request.params as { id: string };
+      const id = parseInt(r.id);
+
+      const pokemons = await container.deletePokemonsUsecase.execute(id);
+      reply.status(200).send(pokemons);
+    },
+  });
+};
