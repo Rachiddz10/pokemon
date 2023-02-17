@@ -12,6 +12,7 @@ export default class AllPokemons extends Component {
     pokemons: [],
     loading: true,
     error: false,
+    search: ""
   };
   async componentDidMount() {
     try {
@@ -32,6 +33,35 @@ export default class AllPokemons extends Component {
         error: true,
       });
     }
+  }
+
+  Search() {
+    this.setState(
+      {
+        loading: true,
+      },
+      async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:3000/pokemons/" + this.state.search,
+            { method: "GET" }
+          );
+          const json = await response.json();
+          this.setState(
+            {
+              pokemons: json,
+              loading: false,
+            },
+            () => {}
+          );
+        } catch (error) {
+          this.setState({
+            loading: false,
+            error: true,
+          });
+        }
+      }
+    );
   }
 
   async handleClickDelete(id) { 
@@ -87,12 +117,21 @@ export default class AllPokemons extends Component {
               <Form className="d-flex">
                 {" "}
                 <Form.Control
-                  type="search"
                   placeholder="Search"
+                  value={this.state.search}
+                  onChange={(e) => {
+                    this.setState({ search: e.target.value }, () => {});
+                  }}
+                  type="search"
                   className="me-2"
                   aria-label="Search"
                 />
-                <Button variant="outline-success">Search</Button>
+                <Button
+                  onClick={this.Search.bind(this)}
+                  variant="outline-success"
+                >
+                  Search
+                </Button>
               </Form>
             </Navbar.Collapse>
           </Container>
