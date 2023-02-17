@@ -7,6 +7,7 @@ export interface ITrainerRepository {
     id: number,
     trainer: { name?: string; gender?: string }
   ): Promise<Trainer>;
+  delete(id: number): Promise<Trainer[]>;
 }
 
 export interface IPokemonRepository {

@@ -32,6 +32,33 @@ export default class Alltrainers extends Component{
               })        }
     }
     
+
+
+    async handleClickDelete(id) {console.log(id)
+      this.setState({
+        loading: true,
+  
+      },async ()=> {   try {
+        const response = await fetch('http://localhost:3000/trainers/'+id, { method: 'DELETE' });
+        const json = await response.json();
+        this.setState({
+          trainers: json,
+          loading: false,
+  
+         }, () => {
+          console.log(json);
+          console.log("supp")
+  
+        })
+      } catch (error) {
+        this.setState({
+          loading: false,
+          error: true
+        })
+      }})
+   
+    
+    }
       
       render () {
         const { trainers, loading, error } = this.state;
@@ -96,7 +123,7 @@ export default class Alltrainers extends Component{
       <Button variant="outline-info">Info</Button>{' '}
       <Button variant="outline-success">Add</Button>{' '} 
       <Button variant="outline-warning">Edit</Button>{' '}
-      <Button variant="outline-danger">Supp</Button>{' '}
+      <Button onClick={this.handleClickDelete.bind(this,trainer.id)} variant="outline-danger">Supp</Button>{' '}
 
                
                </td>
