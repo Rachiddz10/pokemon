@@ -39,4 +39,5 @@ export interface IPokemonRepository {
       image: string;
     }
   ): Promise<Pokemon>;
+  delete(id: number): Promise<Pokemon[]>;
 }

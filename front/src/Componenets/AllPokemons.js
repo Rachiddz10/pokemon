@@ -34,6 +34,33 @@ export default class AllPokemons extends Component {
     }
   }
 
+  async handleClickDelete(id) { 
+    this.setState({
+      loading: true,
+
+    },async ()=> {   try {
+      const response = await fetch('http://localhost:3000/pokemons/'+id, { method: 'DELETE' });
+      const json = await response.json();
+      this.setState({
+        pokemons: json,
+        loading: false,
+
+       }, () => {
+        console.log(json);
+ 
+      })
+    } catch (error) {
+      this.setState({
+        loading: false,
+        error: true
+      })
+    }})
+ 
+  
+  }
+
+
+
   render() {
     const { pokemons, loading, error } = this.state;
     return (
@@ -116,7 +143,7 @@ export default class AllPokemons extends Component {
                       <td>
                         <Button variant="outline-info">Info</Button>{" "}
                         <Button variant="outline-success">Add</Button>{" "}
-                        <Button variant="outline-danger">Supp</Button>{" "}
+                        <Button  onClick={this.handleClickDelete.bind(this,pokemon.id)}  variant="outline-danger">Supp</Button>{" "}
                       </td>
                     </tr>
                   ))}

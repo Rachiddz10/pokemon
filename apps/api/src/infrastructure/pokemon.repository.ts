@@ -37,17 +37,21 @@ export class PokemonRepository implements IPokemonRepository {
     const pokemons: Pokemon[] = await prisma.pokemon.findMany();
     return pokemons;
   }
-  
-  async update(id: number, pokemon: {
-    name: string
-    hp: number,
-    atk: number,
-    def: number,
-    atkspe: number,
-    defspe: number,
-    speed: number,
-    type: string,
-    image : string }): Promise<Pokemon> {
+
+  async update(
+    id: number,
+    pokemon: {
+      name: string;
+      hp: number;
+      atk: number;
+      def: number;
+      atkspe: number;
+      defspe: number;
+      speed: number;
+      type: string;
+      image: string;
+    }
+  ): Promise<Pokemon> {
     const updatedPokemon = await prisma.pokemon.update({
       where: { id },
       data: {
@@ -59,11 +63,18 @@ export class PokemonRepository implements IPokemonRepository {
         defspe: pokemon.defspe,
         speed: pokemon.speed,
         type: pokemon.type,
-        image : pokemon.image 
-       
+        image: pokemon.image,
       },
     });
 
     return updatedPokemon;
-}
+  }
+  async delete(id: number): Promise<Pokemon[]> {
+    await prisma.pokemon.delete({
+      where: { id: id },
+    });
+    const pokemons: Pokemon[] = await prisma.pokemon.findMany();
+
+    return pokemons;
+  }
 }
