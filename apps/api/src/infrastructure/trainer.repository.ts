@@ -20,7 +20,10 @@ export class TrainerRepository implements ITrainerRepository {
     return trainers;
   }
 
-  async update(id: number, trainer: { name?: string; gender?: string }): Promise<Trainer> {
+  async update(
+    id: number,
+    trainer: { name?: string; gender?: string }
+  ): Promise<Trainer> {
     const updatedTrainer = await prisma.trainer.update({
       where: { id },
       data: {
@@ -30,6 +33,13 @@ export class TrainerRepository implements ITrainerRepository {
     });
 
     return updatedTrainer;
-}
+  }
+  async delete(id: number): Promise<Trainer[]> {
+    await prisma.trainer.delete({
+      where: { id: id },
+    });
+    const trainers: Trainer[] = await prisma.trainer.findMany();
 
+    return trainers;
+  }
 }
