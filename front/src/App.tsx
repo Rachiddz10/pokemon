@@ -9,7 +9,7 @@ import {useParams} from 'react-router-dom';
 import PageHome from './Componenets/PageHome';
 import AddTrainer from './Componenets/AddTrainer';
 import AddPokemon from './Componenets/AddPokemon';
-
+import UpdateTrainer from './Componenets/UpdateTrainer';
  function App() {
   return (
     <Router>
@@ -21,7 +21,7 @@ import AddPokemon from './Componenets/AddPokemon';
           <Route path="/Pokemons" element={<AllPokemons />} />
           <Route path="/AddTrainer" element={<AddTrainer />} />
           <Route path="/AddPokemon" element={<AddPokemon />} />
-
+          <Route path="/UpdateTrainer" element={<UpdateTrainer />} />
           {/* 👇️ handle dynamic path */}
           {/**          <Route path="/users/:userId" element={<AllPokemons />} /> */}
           <Route path="/" element={<PageHome />} />
