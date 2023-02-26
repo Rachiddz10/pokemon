@@ -1,5 +1,9 @@
 import { FastifyInstance, FastifyRequest } from "fastify";
 import { PokemonContainer } from "../domain/pokemon/pokemon.container";
+import {
+  initTrainerContainer,
+  TrainerContainer,
+} from "../domain/trainer/trainer.container";
 
 export const registerPokemonRoutes = (
   server: FastifyInstance,
@@ -84,6 +88,44 @@ export const registerPokemonRoutes = (
     handler: async (request, reply) => {
       const { name } = request.params as { name: string };
       const pokemon = await container.findPokemonsUsecase.execute(name);
+      reply.status(200).send(pokemon);
+    },
+  });
+
+  server.route<{
+    Body: {
+      pokemonId: number;
+      trainerId: number;
+    };
+  }>({
+    method: "POST",
+    url: "/pokemons/link",
+    schema: {
+      body: {
+        type: "object",
+        properties: {
+          pokemonId: { type: "number" },
+          trainerId: { type: "number" },
+        },
+        required: ["pokemonId", "trainerId"],
+      },
+    },
+    handler: async (request, reply) => {
+      const { pokemonId, trainerId } = request.body;
+      reply.header("Access-Control-Allow-Origin", "*");
+      reply.header("Access-Control-Allow-Headers", "*");
+      reply.header("mode", "no-cors");
+      const pokemon = await container.linkPokemonToTrainerUseCase.execute(
+        pokemonId,
+        {
+          trainerId,
+        }
+      );
+
+      const trainerContainer: TrainerContainer = initTrainerContainer();
+      await trainerContainer.addPokemonToTrainerUseCase.execute(trainerId, {
+        pokemonId,
+      });
       reply.status(200).send(pokemon);
     },
   });
