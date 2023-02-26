@@ -12,7 +12,7 @@ export default class AllPokemons extends Component {
     pokemons: [],
     loading: true,
     error: false,
-    search: ""
+    search: "",
   };
   async componentDidMount() {
     try {
@@ -64,32 +64,35 @@ export default class AllPokemons extends Component {
     );
   }
 
-  async handleClickDelete(id) { 
-    this.setState({
-      loading: true,
-
-    },async ()=> {   try {
-      const response = await fetch('http://localhost:3000/pokemons/'+id, { method: 'DELETE' });
-      const json = await response.json();
-      this.setState({
-        pokemons: json,
-        loading: false,
-
-       }, () => {
-        console.log(json);
- 
-      })
-    } catch (error) {
-      this.setState({
-        loading: false,
-        error: true
-      })
-    }})
- 
-  
+  async handleClickDelete(id) {
+    this.setState(
+      {
+        loading: true,
+      },
+      async () => {
+        try {
+          const response = await fetch("http://localhost:3000/pokemons/" + id, {
+            method: "DELETE",
+          });
+          const json = await response.json();
+          this.setState(
+            {
+              pokemons: json,
+              loading: false,
+            },
+            () => {
+              console.log(json);
+            }
+          );
+        } catch (error) {
+          this.setState({
+            loading: false,
+            error: true,
+          });
+        }
+      }
+    );
   }
-
-
 
   render() {
     const { pokemons, loading, error } = this.state;
@@ -142,52 +145,53 @@ export default class AllPokemons extends Component {
         ) : (
           <div className="container mt-5">
             {!loading && !error ? (
-              <Table responsive="sm">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th> Name</th>
-
-                    <th>Hit Points</th>
-                    <th>Attack</th>
-                    <th>Defense</th>
-                    <th>Special Attack</th>
-                    <th>Special Defense</th>
-                    <th>Speed</th>
-                    <th>Type</th>
-                    <th>Image</th>
-
-                    <th> ######</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pokemons.map((pokemon) => (
-                    <tr key={pokemon.id}>
-                      <td> {pokemon.id}</td>
-
-                      <td>{pokemon.name}</td>
-                      <td>{pokemon.hp}</td>
-                      <td>{pokemon.atk}</td>
-                      <td>{pokemon.def}</td>
-                      <td>{pokemon.atkspe}</td>
-                      <td>{pokemon.defspe}</td>
-                      <td>{pokemon.speed}</td>
-                      <td>{pokemon.type}</td>
-                      <td>
-                        <div>
-                          <img src={pokemon.image} alt="car" />
+              <div class="row ">
+                {" "}
+                {pokemons.map((pokemon) => (
+                  <div class="col-sm-3 mb-5">
+                    <div class="card h-100">
+                      <div class="container">
+                        <img
+                          class="card-img-top"
+                          src={pokemon.image}
+                          alt="Card image cap"
+                          text
+                        />
+                        <div class="">
+                          <span className="btnI ">
+                            <i
+                              class="fa fa-info fa-lg  "
+                              aria-hidden="true"
+                            ></i>{" "}
+                          </span>{" "}
+                          <span className="btnE ">
+                            <i
+                              class="fa fa-pencil fa-lg  "
+                              aria-hidden="true"
+                            ></i>{" "}
+                          </span>{" "}
+                          <span
+                            className="btnS "
+                            onClick={this.handleClickDelete.bind(
+                              this,
+                              pokemon.id
+                            )}
+                          >
+                            <i
+                              class="fa fa-trash-o fa-lg  "
+                              aria-hidden="true"
+                            ></i>{" "}
+                          </span>{" "}
                         </div>
-                      </td>
-
-                      <td>
-                        <Button variant="outline-info">Info</Button>{" "}
-                        <Button variant="outline-success">Add</Button>{" "}
-                        <Button  onClick={this.handleClickDelete.bind(this,pokemon.id)}  variant="outline-danger">Supp</Button>{" "}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">{pokemon.name}</h5>
+                        <p class="card-subtitle">{pokemon.type}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             ) : (
               <div>%%%%%%%%%%%%%%%%%%%%</div>
             )}
