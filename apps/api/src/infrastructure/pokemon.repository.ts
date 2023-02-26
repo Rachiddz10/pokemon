@@ -13,7 +13,7 @@ export class PokemonRepository implements IPokemonRepository {
     speed: number;
     type: string;
     image: string;
-    //     trainer: Trainer;
+    trainerId: number;
   }): Promise<Pokemon> {
     const newPokemon = await prisma.pokemon.create({
       data: {
@@ -26,7 +26,7 @@ export class PokemonRepository implements IPokemonRepository {
         speed: pokemon.speed,
         type: pokemon.type,
         image: pokemon.image,
-        // trainer: pokemon.trainer,
+        trainerId: pokemon.trainerId,
       },
     });
 
@@ -69,6 +69,22 @@ export class PokemonRepository implements IPokemonRepository {
 
     return updatedPokemon;
   }
+
+  async linkPokemonToTrainer(
+    id: number,
+    pokemon: {
+      trainerId: number;
+    }
+  ): Promise<Pokemon> {
+    const linkPokemonTrainer = await prisma.pokemon.update({
+      where: { id },
+      data: {
+        trainerId: pokemon.trainerId,
+      },
+    });
+    return linkPokemonTrainer;
+  }
+
   async delete(id: number): Promise<Pokemon[]> {
     await prisma.pokemon.delete({
       where: { id: id },
