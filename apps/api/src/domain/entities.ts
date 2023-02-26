@@ -2,6 +2,7 @@ export type Trainer = {
   id: number;
   name: string;
   gender: string;
+  pokemons?: Pokemon[];
 };
 
 export type Pokemon = {
@@ -15,4 +16,5 @@ export type Pokemon = {
   speed: number;
   type: string;
   image: string;
+  trainerId: number | null;
 };
