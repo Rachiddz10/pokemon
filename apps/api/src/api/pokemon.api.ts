@@ -94,7 +94,7 @@ export const registerPokemonRoutes = (
 
   server.route<{
     Body: {
-      pokemonId: number;
+      pokemonIds: number[];
       trainerId: number;
     };
   }>({
@@ -104,28 +104,42 @@ export const registerPokemonRoutes = (
       body: {
         type: "object",
         properties: {
-          pokemonId: { type: "number" },
+          pokemonIds: { type: "array", items: { type: "number" } },
           trainerId: { type: "number" },
         },
-        required: ["pokemonId", "trainerId"],
+        required: ["pokemonIds", "trainerId"],
       },
     },
     handler: async (request, reply) => {
-      const { pokemonId, trainerId } = request.body;
+      const { pokemonIds, trainerId } = request.body;
+      if (!Array.isArray(pokemonIds) || pokemonIds.length === 0) {
+        reply.status(400).send({ error: "Invalid pokemonIds" });
+        return;
+      }
+
+      if (!trainerId || isNaN(trainerId)) {
+        reply.status(400).send({ error: "Invalid trainerId" });
+        return;
+      }
       reply.header("Access-Control-Allow-Origin", "*");
       reply.header("Access-Control-Allow-Headers", "*");
       reply.header("mode", "no-cors");
-      const pokemon = await container.linkPokemonToTrainerUseCase.execute(
-        pokemonId,
-        {
-          trainerId,
-        }
+      const pokemon = await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          container.linkPokemonToTrainerUseCase.execute(pokemonId, {
+            trainerId,
+          })
+        )
       );
 
       const trainerContainer: TrainerContainer = initTrainerContainer();
-      await trainerContainer.addPokemonToTrainerUseCase.execute(trainerId, {
-        pokemonId,
-      });
+      await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          trainerContainer.addPokemonToTrainerUseCase.execute(trainerId, {
+            pokemonId,
+          })
+        )
+      );
       reply.status(200).send(pokemon);
     },
   });
