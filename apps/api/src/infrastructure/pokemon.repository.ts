@@ -175,4 +175,6 @@ export class PokemonRepository implements IPokemonRepository {
 
     return pokemons;
   }
+
+
 }

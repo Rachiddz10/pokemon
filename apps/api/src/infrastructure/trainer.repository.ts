@@ -42,4 +42,28 @@ export class TrainerRepository implements ITrainerRepository {
 
     return trainers;
   }
+
+  async findByGender(gender: string): Promise<Trainer[]> {
+    const trainers: Trainer[] = await prisma.trainer.findMany({
+      where: {
+        gender: {
+          equals: gender,
+          mode: 'insensitive',
+        },
+      },
+    });
+    return trainers;
+  }
+
+  async findByName(name: string): Promise<Trainer[]> {
+    const trainers: Trainer[] = await prisma.trainer.findMany({
+      where: {
+        name: {
+          equals: name,
+          mode: 'insensitive',
+        },
+      },
+    });
+    return trainers;
+  }
 }
