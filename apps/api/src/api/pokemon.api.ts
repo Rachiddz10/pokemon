@@ -140,6 +140,7 @@ export const registerPokemonRoutes = (
           })
         )
       );
+
       reply.status(200).send(pokemon);
     },
   });
