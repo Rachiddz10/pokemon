@@ -15,7 +15,11 @@ export class TrainerRepository implements ITrainerRepository {
   }
 
   async findAll(): Promise<Trainer[]> {
-    const trainers: Trainer[] = await prisma.trainer.findMany();
+    const trainers: Trainer[] = await prisma.trainer.findMany({
+      include: {
+        pokemons: true,
+      },
+    });
 
     return trainers;
   }
@@ -34,6 +38,23 @@ export class TrainerRepository implements ITrainerRepository {
 
     return updatedTrainer;
   }
+
+  async addPokemonToTrainer(
+    id: number,
+    trainer: { pokemonId: number }
+  ): Promise<Trainer> {
+    const addPokemonTrainer = await prisma.trainer.update({
+      where: { id },
+      data: {
+        pokemons: {
+          connect: { id: trainer.pokemonId },
+        },
+      },
+      include: { pokemons: true },
+    });
+    return addPokemonTrainer;
+  }
+
   async delete(id: number): Promise<Trainer[]> {
     await prisma.trainer.delete({
       where: { id: id },

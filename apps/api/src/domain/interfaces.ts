@@ -15,6 +15,12 @@ export interface ITrainerRepository {
     id: number,
     trainer: { name?: string; gender?: string }
   ): Promise<Trainer>;
+  addPokemonToTrainer(
+    id: number,
+    trainer: {
+      pokemonId: number;
+    }
+  ): Promise<Trainer>;
   delete(id: number): Promise<Trainer[]>;
 }
 
@@ -46,6 +52,12 @@ export interface IPokemonRepository {
       speed: number;
       type: string;
       image: string;
+    }
+  ): Promise<Pokemon>;
+  linkPokemonToTrainer(
+    id: number,
+    pokemon: {
+      trainerId: number;
     }
   ): Promise<Pokemon>;
   delete(id: number): Promise<Pokemon[]>;
