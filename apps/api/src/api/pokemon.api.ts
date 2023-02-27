@@ -227,4 +227,28 @@ export const registerPokemonRoutes = (
       reply.status(200).send(pokemons);
     },
   });
+
+  server.route<{}>({
+    method: "GET",
+    url: "/pokemons/",
+
+    handler: async (request, reply) => {
+      const { name, hp, atk, def, atkspe, defspe, speed, type } = request.query as {
+        name?: string;
+        hp?: number;
+        atk?: number;
+        def?: number;
+        atkspe?: number;
+        defspe?: number;
+        speed?: number;
+        type?: string;
+
+
+      };
+
+      const filteredPokemons = await container.filterPokemonsUsecase.execute(name, hp, atk, def, atkspe, defspe, speed, type);
+
+      reply.status(200).send(filteredPokemons);
+    },
+  });
 };

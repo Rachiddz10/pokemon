@@ -93,4 +93,23 @@ export const registerTrainerRoutes = (
       reply.status(200).send(trainers);
     },
   });
+
+
+
+server.route<{}>({
+  method: "GET",
+  url:  "/trainers/",
+
+  handler: async (request, reply) => {
+    const { name, gender} = request.query as {
+      name?: string;
+      gender?: string;
+    };
+
+    const filterTrainers = await container.filterTrainersUsecase.execute(name, gender);
+
+    reply.status(200).send(filterTrainers);
+  },
+});
+
 };
