@@ -13,6 +13,9 @@ export default class AllPokemons extends Component {
     loading: true,
     error: false,
     search: "",
+    currentPage: 1,
+    pokemonsPerPage: 8,
+    showMax: 3,
   };
   async componentDidMount() {
     try {
@@ -94,8 +97,42 @@ export default class AllPokemons extends Component {
     );
   }
 
+  handleClick(num, etat) {
+    if (etat === "normale") {
+      this.setState(
+        {
+          currentPage: Number(num),
+        },
+        () => {}
+      );
+    } else if (etat === "prev") {
+      this.setState(
+        { currentPage: Number(num) - 1 >= 1 ? Number(num) - 1 : Number(num) },
+        () => {}
+      );
+    } else if (etat === "next") {
+      this.setState(
+        {
+          currentPage:
+            Number(num) + 1 <=
+            Math.ceil(this.state.pokemons.length / this.state.pokemonsPerPage)
+              ? Number(num) + 1
+              : Number(num),
+        },
+        () => {}
+      );
+    }
+  }
+
   render() {
-    const { pokemons, loading, error } = this.state;
+    const { pokemons, loading, error, showMax } = this.state;
+    const { currentPage, pokemonsPerPage } = this.state;
+    const indexOfLastPokemon = currentPage * pokemonsPerPage;
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+    const currentPokemons = pokemons.slice(
+      indexOfFirstPokemon,
+      indexOfLastPokemon
+    );
     return (
       <div>
         <Alert key="info" variant="info">
@@ -147,7 +184,7 @@ export default class AllPokemons extends Component {
             {!loading && !error ? (
               <div class="row ">
                 {" "}
-                {pokemons.map((pokemon) => (
+                {currentPokemons.map((pokemon) => (
                   <div class="col-sm-3 mb-5">
                     <div class="card h-100">
                       <div class="container">
@@ -200,7 +237,13 @@ export default class AllPokemons extends Component {
             <div className="row">
               <div className="col-md-4 col-md-offset-3"> </div>
               <div className="col-md-6 col-md-offset-3">
-                <Pagination />
+                <Pagination
+                  liste={pokemons}
+                  listePerPage={pokemonsPerPage}
+                  showMax={showMax}
+                  currentPage={currentPage}
+                  handleClick={this.handleClick.bind(this)}
+                ></Pagination>
               </div>
             </div>
           </div>
