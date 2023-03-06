@@ -6,7 +6,7 @@ test:
   image: node
   script:
     - echo "Testing App"
-    - yarn install
     - cd apps/api
+    - yarn install
     - CI=true yarn test
     - echo "Test successfully!"
