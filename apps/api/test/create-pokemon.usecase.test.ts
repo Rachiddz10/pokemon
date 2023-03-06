@@ -19,7 +19,6 @@ describe("Create Pokemon Usecase - test", () => {
     delete: vi.fn(),
   };
 
-
   const createPokemonUseCase = new CreatePokemonUsecase(pokemonRepositoryMock);
 
   afterEach(() => {
