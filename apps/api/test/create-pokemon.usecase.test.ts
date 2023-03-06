@@ -6,7 +6,19 @@ describe("Create Pokemon Usecase - test", () => {
   const pokemonRepositoryMock = {
     create: vi.fn(),
     findAll: vi.fn(),
+    findByName: vi.fn(),
+    findByType: vi.fn(),
+    findByhp: vi.fn(),
+    findByatke: vi.fn(),
+    findByatkspe: vi.fn(),
+    findBydefspe: vi.fn(),
+    findBySpeed: vi.fn(),
+    findByDefense: vi.fn(),
+    update: vi.fn(),
+    linkPokemonToTrainer: vi.fn(),
+    delete: vi.fn(),
   };
+
 
   const createPokemonUseCase = new CreatePokemonUsecase(pokemonRepositoryMock);
 
@@ -28,6 +40,7 @@ describe("Create Pokemon Usecase - test", () => {
       type: "Electricity",
       image:
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+      trainerId: null,
     };
     pokemonRepositoryMock.create.mockImplementation(() => expectedPokemon);
 
