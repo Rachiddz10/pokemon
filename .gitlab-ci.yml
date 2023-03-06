@@ -5,6 +5,7 @@ test:
   stage: test
   image: postgres:15.1-alpine
    restart: always
+   environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: poca-db
@@ -17,5 +18,7 @@ test:
     - cd apps/api
     - yarn install
     - yarn build
+    - yarn db:start
+    - yarn db:migrate
     - CI=true yarn test
     - echo "Test successfully!"
