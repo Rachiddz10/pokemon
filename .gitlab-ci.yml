@@ -7,5 +7,6 @@ test:
   script:
     - echo "Testing App"
     - yarn install
+    - cd apps/api
     - CI=true yarn test
     - echo "Test successfully!"
