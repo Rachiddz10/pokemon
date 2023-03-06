@@ -3,7 +3,16 @@ stages:
 
 test:
   stage: test
-  image: node
+  image: postgres:15.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: poca-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/.tmp/db:/var/lib/postgresql/data
   script:
     - echo "Testing App"
     - cd apps/api
