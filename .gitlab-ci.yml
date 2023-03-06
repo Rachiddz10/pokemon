@@ -5,7 +5,7 @@ test:
   stage: test
   image: postgres:15.1-alpine
    restart: always
-   environment:
+   variables:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
       POSTGRES_DB: poca-db
