@@ -39,17 +39,6 @@ body {
   background-color: #d5011d;
 }
 
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  height: calc(100vh - 132px);
-  padding: 0 30px 30px;
-  position: relative;
-  z-index: 1;
-}
-
 .container .imagem_titulo {
   max-width: 500px;
   height: 180px;
@@ -77,37 +66,6 @@ body {
 
 .container .botao:hover {
   transform: scale(1.1);
-}
-
-.fundo_video {
-  position: fixed;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  object-fit: cover;
-}
-
-.fundo_video .video {
-  height: 100%;
-}
-
-.fundo_video::after {
-  content: "";
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  background: linear-gradient(
-    90deg,
-    rgba(0, 15, 8, 1) 0%,
-    rgba(0, 0, 0, 0.7959558823529411) 50%,
-    rgba(65, 157, 120, 1) 100%
-  );
 }
 
 .modal {
@@ -156,13 +114,6 @@ body {
   body {
   }
 
-  .container {
-    flex-wrap: wrap;
-    justify-content: center;
-    height: auto;
-    gap: 30px;
-  }
-
   .container .img_mario {
     max-width: 50%;
   }
@@ -198,18 +149,6 @@ body {
     width: 30px;
     line-height: 30px;
   }
-
-  .modal #video {
-    width: 300px;
-    height: 169px;
-  }
-}
-
-@media (max-width: 376px) {
-  .modal #video {
-    width: 250px;
-    height: 140px;
-  }
 }
 
 * {
@@ -238,12 +177,98 @@ a {
   z-index: 1;
 }
 
-#video-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.8;
-}
+
+  section {
+    /* For styling purposes */
+    min-width: 50vw;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Set where the snapping should happen */
+    scroll-snap-align: start;
+    border-radius: 50px;
+  }
+  
+  .stats {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stats div {
+    text-align: center;
+    width: 25%;
+  }
+  .container .btnS {
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /*background-color: #555;*/
+    padding: 12px 24px;
+     cursor: pointer;
+     text-align: center;
+ 
+  }
+  .container .btnE {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /*background-color: #555;*/
+    padding: 12px 24px;
+     cursor: pointer;
+     text-align: center;
+
+  }
+  
+  .container .btnI {
+    position: absolute;
+    top: 60%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /*background-color: #555;*/
+    padding: 12px 24px;
+     cursor: pointer;
+     text-align: center;
+
+  }
+  
+  
+  .container .btnI:hover i.fa{
+    background-color: white;
+    color: #5bc0de;
+  }
+  .container .btnS:hover  i.fa{
+    background-color: white;
+    color: #d9534f;
+
+  }
+  .container .btnE:hover i.fa{
+    background-color: white;
+    color: #5cb85c;
+
+  }
+  i.fa {
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0 0 2px #888;
+    padding: 0.5em 0.6em;
+  
+  }
+  .btnE i.fa{
+    background-color: #5cb85c;
+    color: white;
+  }
+  .btnI i.fa{
+    background-color: #5bc0de;
+    color: white;
+
+  }
+  .btnS i.fa{
+    background-color: #d9534f;
+    color: white;
+  }
