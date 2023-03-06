@@ -1,0 +1,11 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: node
+  script:
+    - echo "Testing App"
+    - yarn install
+    - CI=true yarn test
+    - echo "Test successfully!"
