@@ -7,7 +7,6 @@ import rk from '../images/143.svg';
 import jk from '../images/197.svg';
 import pokeCast from '../images/mainCast1.png';
 
-import im1 from '../images/logo-chapeu-mario.png';
 import im2 from '../images/pikaLOGO.gif';
 import im3 from '../images/mainCast1.png';
  
