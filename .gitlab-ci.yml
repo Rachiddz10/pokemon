@@ -8,7 +8,6 @@ test:
     - echo "Testing App"
     - cd apps/api
     - yarn install
-    - yarn db:migrate
     - yarn build
     - CI=true yarn test
     - echo "Test successfully!"
