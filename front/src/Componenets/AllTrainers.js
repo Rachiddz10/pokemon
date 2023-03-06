@@ -141,7 +141,7 @@ export default class Alltrainers extends Component {
         <Alert key="info" variant="info">
           <h2> All Trainers </h2>
         </Alert>
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg">
           <Container fluid>
             {loading ? null : (
               <Navbar.Brand href="#">nombre : {trainers.length}</Navbar.Brand>

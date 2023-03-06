@@ -140,7 +140,7 @@ export default class AllPokemons extends Component {
           <h2> All Pokemons </h2>{" "}
         </Alert>
 
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg">
           <Container fluid>
             {loading ? null : (
               <Navbar.Brand href="#">nombre : {pokemons.length}</Navbar.Brand>
