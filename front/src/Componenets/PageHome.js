@@ -20,7 +20,7 @@ export default class PageHome extends Component{
         //const mystyle = { 'background-image': "url('../images/background.jpg')"};
          return (
           <div class="body">
-          <main class="container">
+          <main class="container" style={{maxwidth: '1440px', margin: '0 auto', display: 'flex', alignitems: 'center', height: 'calc(100vh - 132px)', padding:'0 30px 30px', position: 'relative', zindex: '1'}}>
             <div class="informacoes">
               <img
                 class="imagem_titulo"
@@ -37,7 +37,7 @@ export default class PageHome extends Component{
                 <button class="botao">Find POKEMONS</button>
               </a>
             </div>
-            <img class="img_mario" src={im3} alt=""/>
+            <img class="img_mario" src={im3} alt="" style={{maxwidth: '500px', flexwrap: 'wrap', justifycontent: 'center', height: 'auto', gap: '30px'}}/>
             <div class="modal">
             </div>
           </main>
