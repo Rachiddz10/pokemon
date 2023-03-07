@@ -31,8 +31,6 @@ export default class PageHome extends Component{
               </a>
             </div>
             <img class="img_mario" src={im3} alt="" style={{maxwidth: '500px', flexwrap: 'wrap', justifycontent: 'center', height: 'auto', gap: '30px'}}/>
-            <div class="modal">
-            </div>
           </main>
         </div>
         );
