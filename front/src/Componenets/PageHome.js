@@ -1,11 +1,4 @@
 import { Component } from "react";
-import logo from '../images/Pokemon.png';
-import ash from '../images/Ash.webp';
-import pika from '../images/pikapika.webp';
-import pk from '../images/25.svg';
-import rk from '../images/143.svg';
-import jk from '../images/197.svg';
-import pokeCast from '../images/mainCast1.png';
 
 import im2 from '../images/pikaLOGO.gif';
 import im3 from '../images/mainCast1.png';
@@ -20,7 +13,7 @@ export default class PageHome extends Component{
         //const mystyle = { 'background-image': "url('../images/background.jpg')"};
          return (
           <div class="body">
-          <main class="container" style={{maxwidth: '1440px', margin: '0 auto', display: 'flex', alignitems: 'center', height: 'calc(100vh - 132px)', padding:'0 30px 30px', position: 'relative', zindex: '1'}}>
+          <main class="homeContainer">
             <div class="informacoes">
               <img
                 class="imagem_titulo"
