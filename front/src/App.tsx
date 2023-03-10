@@ -10,6 +10,7 @@ import PageHome from './Componenets/PageHome';
 import AddTrainer from './Componenets/AddTrainer';
 import AddPokemon from './Componenets/AddPokemon';
 import UpdateTrainer from './Componenets/UpdateTrainer';
+import UpdatePokemon from './Componenets/UpdatePokemon';
  function App() {
   return (
     <Router>
@@ -22,6 +23,7 @@ import UpdateTrainer from './Componenets/UpdateTrainer';
           <Route path="/AddTrainer" element={<AddTrainer />} />
           <Route path="/AddPokemon" element={<AddPokemon />} />
           <Route path="/UpdateTrainer" element={<UpdateTrainer />} />
+          <Route path="/UpdatePokemon" element={<UpdatePokemon />} />
           {/* 👇️ handle dynamic path */}
           {/**          <Route path="/users/:userId" element={<AllPokemons />} /> */}
           <Route path="/" element={<PageHome />} />
