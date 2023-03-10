@@ -7,15 +7,45 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
+import UpdatePokemon from "./UpdatePokemon";
 export default class AllPokemons extends Component {
   state = {
     pokemons: [],
     loading: true,
     error: false,
+    pokemonUpdate: null,
     search: "",
     currentPage: 1,
     pokemonsPerPage: 8,
     showMax: 3,
+  };
+  showModal = (k) => {
+    this.setState({ show: true,  pokemonUpdate: k }, () => {
+      console.log(this.state.pokemonUpdate);
+    });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false, pokemonUpdate: null }, async () => {
+      try {
+        const response = await fetch("http://localhost:3000/pokemons");
+        const json = await response.json();
+        this.setState(
+          {
+            pokemons: json,
+            loading: false,
+          },
+          () => {
+            console.log(json);
+          }
+        );
+      } catch (error) {
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      }
+    });
   };
   async componentDidMount() {
     try {
@@ -125,7 +155,7 @@ export default class AllPokemons extends Component {
   }
 
   render() {
-    const { pokemons, loading, error, showMax } = this.state;
+    const { pokemons, loading, error, pokemonUpdate, showMax } = this.state;
     const { currentPage, pokemonsPerPage } = this.state;
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
@@ -201,7 +231,8 @@ export default class AllPokemons extends Component {
                               aria-hidden="true"
                             ></i>{" "}
                           </span>{" "}
-                          <span className="btnE ">
+                          <span className="btnE " onClick={this.showModal.bind(this, pokemon)}
+                          variant="outline-success">
                             <i
                               class="fa fa-pencil fa-lg  "
                               aria-hidden="true"
@@ -246,6 +277,13 @@ export default class AllPokemons extends Component {
                 ></Pagination>
               </div>
             </div>
+            {pokemonUpdate ? (
+              <UpdatePokemon
+                show={this.state.show}
+                handleHideModal={this.hideModal.bind(this)}
+                pokemon={pokemonUpdate}
+              ></UpdatePokemon>
+            ) : null}
           </div>
         )}
       </div>
