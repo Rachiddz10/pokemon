@@ -54,7 +54,7 @@ export default class UpdateTrainer extends Component {
       <div>
         <Modal show={this.props.show} onHide={this.props.handleHideModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Modifier le dresseur </Modal.Title>
+            <Modal.Title>Modifier le formateur</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={this.handleSubmit}>

@@ -181,7 +181,17 @@ export const registerPokemonRoutes = (
           type: { type: "string" },
           image: { type: "string" },
         },
-        required: [],
+        required: [
+          "name",
+          "hp",
+          "atk",
+          "def",
+          "atkspe",
+          "defspe",
+          "speed",
+          "type",
+          "image",
+        ],
       },
     },
     handler: async (request, reply) => {
