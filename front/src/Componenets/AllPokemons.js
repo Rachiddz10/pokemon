@@ -7,12 +7,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import TYPES from "../Types/Index.js";
 import UpdatePokemon from "./UpdatePokemon";
 export default class AllPokemons extends Component {
   state = {
     pokemons: [],
     loading: true,
     error: false,
+    textInput: "",
     pokemonUpdate: null,
     search: "",
     currentPage: 1,
@@ -20,7 +24,7 @@ export default class AllPokemons extends Component {
     showMax: 3,
   };
   showModal = (k) => {
-    this.setState({ show: true,  pokemonUpdate: k }, () => {
+    this.setState({ show: true, pokemonUpdate: k }, () => {
       console.log(this.state.pokemonUpdate);
     });
   };
@@ -76,7 +80,9 @@ export default class AllPokemons extends Component {
       async () => {
         try {
           const response = await fetch(
-            "http://localhost:3000/pokemons/" + this.state.search,
+            "http://localhost:3000/pokemons/" +
+              this.state.search +
+              this.state.textInput,
             { method: "GET" }
           );
           const json = await response.json();
@@ -175,6 +181,7 @@ export default class AllPokemons extends Component {
             {loading ? null : (
               <Navbar.Brand href="#">nombre : {pokemons.length}</Navbar.Brand>
             )}
+
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav
@@ -184,13 +191,229 @@ export default class AllPokemons extends Component {
               >
                 {" "}
               </Nav>
+
+              <DropdownButton id="dropdown-basic-button">
+                <Dropdown.Item
+                  href="#"
+                  onClick={() => {
+                    this.setState({ search: "?name=" });
+                  }}
+                >
+                  NAME
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#"
+                  onClick={() => {
+                    this.setState({ search: "?hp=" });
+                  }}
+                >
+                  HP
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#"
+                  onClick={() => {
+                    this.setState({ search: "?atk=" });
+                  }}
+                >
+                  ATK
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#"
+                  onClick={() => {
+                    this.setState({ search: "?def=" });
+                  }}
+                >
+                  DEF
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#"
+                  onClick={() => {
+                    this.setState({ search: "?atkspe=" });
+                  }}
+                >
+                  SP.ATK
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#"
+                  onClick={() => {
+                    this.setState({ search: "?defspe=" });
+                  }}
+                >
+                  SP.DEF
+                </Dropdown.Item>
+                <Dropdown.Item
+                  href="#"
+                  onClick={() => {
+                    this.setState({ search: "?speed=" });
+                  }}
+                >
+                  SPEED
+                </Dropdown.Item>
+              </DropdownButton>
+
+              <div class="d-flex btn-group">
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=bug" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.bugLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=dark" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.darkLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=dragon" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.dragonLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=electric" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.electricLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=fighting" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.fightingLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=fire" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.fireLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=flying" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.flyingLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=ghost" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.ghostLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=grass" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.grassLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=ground" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.groundLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=ice" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.iceLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=normal" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.normalLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=poison" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.poisonLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=psychic" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.psychicLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=rock" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.rockLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=steel" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.steelLogo} width="20"></img>
+                </button>
+                <button
+                  className="btn-sm btn-outline-secondary rounded-0"
+                  onClick={() => {
+                    this.setState({ search: "?type=water" });
+                    this.Search();
+                  }}
+                >
+                  <img className="" src={TYPES.waterLogo} width="20"></img>
+                </button>
+              </div>
+
               <Form className="d-flex">
                 {" "}
                 <Form.Control
                   placeholder="Search"
-                  value={this.state.search}
+                  value={this.state.textInput}
                   onChange={(e) => {
-                    this.setState({ search: e.target.value }, () => {});
+                    this.setState({ textInput: e.target.value }, () => {});
                   }}
                   type="search"
                   className="me-2"
@@ -231,8 +454,11 @@ export default class AllPokemons extends Component {
                               aria-hidden="true"
                             ></i>{" "}
                           </span>{" "}
-                          <span className="btnE " onClick={this.showModal.bind(this, pokemon)}
-                          variant="outline-success">
+                          <span
+                            className="btnE "
+                            onClick={this.showModal.bind(this, pokemon)}
+                            variant="outline-success"
+                          >
                             <i
                               class="fa fa-pencil fa-lg  "
                               aria-hidden="true"
