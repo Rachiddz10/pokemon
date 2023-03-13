@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+
+import logo from '../images/Pokemon.png';
  
 function NavBar() {
   const mystyle = { minWidth: '25%' }; 
@@ -12,10 +14,16 @@ function NavBar() {
   const myclass = " btn  btn-outline-info rounded-pill mx-3 text-info font-weight-bold"
   return (
 
-    <Navbar bg="withe" expand="lg" className='my-2 ml-5'>
+    <Navbar expand="lg" className='my-2 ml-5'>
       <Container fluid>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
+          <a href="/" id="navbar-logo"  class="desktop">
+            <img src={logo} 
+            alt="Poke Hunt logo"
+            width="50px"
+            height="50px" />
+          </a>
           <Nav className="me-auto mx-5  mh-100" navbarScroll>
             <Nav.Link href="/" style={mystyle} className={myclass}>Home</Nav.Link>
 

@@ -5,6 +5,8 @@ import { FindPokemonsUsecase } from "./find-pokemon.usecase";
 import { UpdatePokemonUsecase } from "./update-pokemon.usecase";
 import { DeletePokemonUsecase } from "./delete-pokemon.usecase";
 import { LinkPokemonToTrainerUseCase } from "./link-pokemon-to-trainer.usecase";
+import { FilterPokemonsUsecase } from "./filter-Pokemon.usecase";
+
 export type PokemonContainer = {
   createPokemonUsecase: CreatePokemonUsecase;
   getAllPokemonUsecase: GetAllPokemonUsecase;
@@ -12,6 +14,7 @@ export type PokemonContainer = {
   updatePokemonUsecase: UpdatePokemonUsecase;
   deletePokemonsUsecase: DeletePokemonUsecase;
   linkPokemonToTrainerUseCase: LinkPokemonToTrainerUseCase;
+  filterPokemonsUsecase: FilterPokemonsUsecase;
 };
 
 export const initPokemonContainer = (): PokemonContainer => {
@@ -24,6 +27,7 @@ export const initPokemonContainer = (): PokemonContainer => {
   const linkPokemonToTrainerUseCase = new LinkPokemonToTrainerUseCase(
     pokemonRepository
   );
+  const filterPokemonsUsecase = new FilterPokemonsUsecase(pokemonRepository);
   return {
     createPokemonUsecase,
     getAllPokemonUsecase,
@@ -31,5 +35,6 @@ export const initPokemonContainer = (): PokemonContainer => {
     updatePokemonUsecase,
     deletePokemonsUsecase,
     linkPokemonToTrainerUseCase,
+    filterPokemonsUsecase,
   };
 };

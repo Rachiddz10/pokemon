@@ -1,187 +1,396 @@
-.image-container {
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index:1;
-}
-
-.box1 {
-  background-color: rgb(224, 245, 240);
-  color: #070704;
-  opacity: .5;
-  height: 600px;
-  border-radius: 10px;
-  display: flex;
-  animation: shine 10s infinite;
-  box-shadow:
-  inset 60px 0 120px rgb(57, 158, 241),  /* left magenta */
-  inset -60px 0 120px rgb(52, 118, 231), /* right cyan */
-  0 0 50px #fff,            /* outer white */
-  -10px 0 80px rgb(67, 99, 120),        /* outer left magenta */
-  10px 0 80px rgb(86, 117, 117);  
-}
-
-.center {
-  margin: auto;
-  width: 60%;
-  top: -100px;
-}
-
-#leftbox {
-  float:left;
-  width:25%;
-  height:250px;
-  position: relative;
-}
-#middlebox{
-  float:left;
-  width:50%;
-  height:280px;
-  z-index:-1;
-}
-
-@keyframes shine{
-10% {
-  opacity: 1;
-  top: -30%;
-  left: -30%;
-  transition-property: left, top, opacity;
-  transition-duration: 0.7s, 0.7s, 0.15s;
-  transition-timing-function: ease;
-}
-100% {
-  opacity: 0.5;
-  top: -30%;
-  left: -30%;
-  transition-property: left, top, opacity;
-}
-}
-
-#rightbox{
-  float:right;
-  width: 25%;
-  height:250px;
-  position: relative;
-  z-index: 100;
-}
-.pikachu{
-  position: absolute;
-  top: -130px;
-  right: 20px;
-  left: -400px;
-  height: 1000px;
-}
-
-/* Hide the scroll bars 
 body {
-  overflow-y: hidden;
-}*/
-
-.slides {
-  /* We set the scroll snapping */
-  scroll-snap-type: x mandatory;
-  /* Necessary for mobile scrolling */
-  -webkit-overflow-scrolling: touch;
-  /* For layout purposes */
-  display: flex;
-  /* To allow horizontal scrolling */
-  overflow-x: scroll;
-  align-items: center;
-  border-radius: 50px;
-}
-
-section {
-  /* For styling purposes */
-  min-width: 50vw;
-  display: flex;
-  background-repeat: no-repeat;
+  font-family: "Poppins";
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/welcome-background.png');
   background-size: cover;
-  /* Set where the snapping should happen */
-  scroll-snap-align: start;
-  border-radius: 50px;
+  background-position: center;
 }
 
-.stats {
-  margin-top: 50px;
+.cabecalho {
   display: flex;
   justify-content: space-between;
+  padding: 30px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.cabecalho .logo {
+  width: 65px;
+}
+
+.cabecalho .menu {
+  height: 100%;
+  display: flex;
   align-items: center;
 }
-.stats div {
+
+.cabecalho nav li a {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  transition: 0.2s;
+}
+
+.cabecalho nav li a:hover {
+  background-color: #d5011d;
+}
+
+.container .imagem_titulo {
+  max-width: 500px;
+  height: 180px;
+}
+
+.container .descricao {
+  color: #a8adb7;
+  width: 85%;
+  font-size: 18px;
+  margin: 30px 0;
+}
+
+.container .botao {
+  background-color: #ff0021;
+  color: #ffffff;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  transition: 0.5s all ease-in-out;
+  cursor: url("images/cursor.cur"), auto;
+}
+
+.container .botao:hover {
+  transform: scale(1.1);
+}
+
+.homeModal {
+  background-color: rgba(52, 52, 50, 0.749);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.conteudo_homeModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  border-radius: 5px;
+  gap: 15px;
+}
+
+.fechar_homeModal {
+  background-color: #ffffff;
+  color: #f03a17;
+  font-weight: bold;
+  font-size: 20px;
+  width: 40px;
   text-align: center;
-  width: 25%;
-}
-.container .btnS {
-  position: absolute;
-  top: 60%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  /*background-color: #555;*/
-  padding: 12px 24px;
-   cursor: pointer;
-   text-align: center;
-
-}
-.container .btnE {
-  position: absolute;
-  top: 60%;
-  left: 40%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  /*background-color: #555;*/
-  padding: 12px 24px;
-   cursor: pointer;
-   text-align: center;
-
+  cursor: pointer;
+  border-radius: 10px;
 }
 
-.container .btnI {
-  position: absolute;
-  top: 60%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  /*background-color: #555;*/
-  padding: 12px 24px;
-   cursor: pointer;
-   text-align: center;
-
+.homeModal iframe {
+  border-width: 0;
+  width: 640px;
+  height: 360px;
 }
 
+.homeModal.aberto {
+  opacity: 1;
+  visibility: visible;
+}
 
-.container .btnI:hover i.fa{
-  background-color: white;
-  color: #5bc0de;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: url("images/cursor.cur"), auto;
 }
-.container .btnS:hover  i.fa{
-  background-color: white;
-  color: #d9534f;
 
+ul {
+  list-style: none;
 }
-.container .btnE:hover i.fa{
-  background-color: white;
-  color: #5cb85c;
 
+a {
+  text-decoration: none;
 }
-i.fa {
-  display: inline-block;
-  border-radius: 60px;
-  box-shadow: 0 0 2px #888;
-  padding: 0.5em 0.6em;
 
+.transparent {
+  background-color: black !important;
+  border-color: transparent !important;
 }
-.btnE i.fa{
-  background-color: #5cb85c;
-  color: white;
-}
-.btnI i.fa{
-  background-color: #5bc0de;
-  color: white;
 
+.Navbar {
+  background-color: transparent !important;
+  position: relative;
+  z-index: 1;
 }
-.btnS i.fa{
-  background-color: #d9534f;
-  color: white;
-}
+
+
+  section {
+    /* For styling purposes */
+    min-width: 50vw;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Set where the snapping should happen */
+    scroll-snap-align: start;
+    border-radius: 50px;
+  }
+  
+  .stats {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stats div {
+    text-align: center;
+    width: 25%;
+  }
+  .container .btnS {
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /*background-color: #555;*/
+    padding: 12px 24px;
+     cursor: pointer;
+     text-align: center;
+ 
+  }
+  .container .btnE {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /*background-color: #555;*/
+    padding: 12px 24px;
+     cursor: pointer;
+     text-align: center;
+
+  }
+  
+  .container .btnI {
+    position: absolute;
+    top: 60%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    /*background-color: #555;*/
+    padding: 12px 24px;
+     cursor: pointer;
+     text-align: center;
+
+  }
+  
+  
+  .container .btnI:hover i.fa{
+    background-color: white;
+    color: #5bc0de;
+  }
+  .container .btnS:hover  i.fa{
+    background-color: white;
+    color: #d9534f;
+
+  }
+  .container .btnE:hover i.fa{
+    background-color: white;
+    color: #5cb85c;
+
+  }
+  i.fa {
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0 0 2px #888;
+    padding: 0.5em 0.6em;
+  
+  }
+  .btnE i.fa{
+    background-color: #5cb85c;
+    color: white;
+  }
+  .btnI i.fa{
+    background-color: #5bc0de;
+    color: white;
+
+  }
+  .btnS i.fa{
+    background-color: #d9534f;
+    color: white;
+  }
+
+    
+
+
+
+  .cabecalho {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  
+  .cabecalho .logo {
+    width: 65px;
+  }
+  
+  .cabecalho .menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .cabecalho nav li a {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: 0.2s;
+  }
+  
+  .cabecalho nav li a:hover {
+    background-color: #d5011d;
+  }
+  
+  .homeContainer {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: calc(100vh - 132px);
+    padding: 0 30px 30px;
+  }
+  
+  .homeContainer .imagem_titulo {
+    max-width: 500px;
+  }
+  
+  .homeContainer .descricao {
+    color: #a8adb7;
+    width: 85%;
+    font-size: 18px;
+    margin: 30px 0;
+  }
+  
+  .homeContainer .botao {
+    background-color: #ff0021;
+    color: #ffffff;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    transition: 0.5s all ease-in-out;
+  }
+  
+  .homeContainer .botao:hover {
+    transform: scale(1.1);
+  }
+  
+  .homeModal {
+    background-color: rgba(52, 52, 50, 0.749);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+  }
+  
+  .conteudo_homeModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    border-radius: 5px;
+    gap: 15px;
+  }
+  
+  .fechar_homeModal {
+    background-color: #ffffff;
+    color: #f03a17;
+    font-weight: bold;
+    font-size: 20px;
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .homeModal iframe {
+    border-width: 0;
+    width: 640px;
+    height: 360px;
+  }
+  
+  .homeModal.aberto {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+
+  @media (max-width: 1200px) {
+    body {
+    }
+  
+    .homeContainer {
+      flex-wrap: wrap;
+      justify-content: center;
+      height: auto;
+      gap: 30px;
+    }
+  
+    .homeContainer .img_mario {
+      max-width: 50%;
+    }
+  
+    .homeContainer .informacoes {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+  
+    .homeContainer .descricao {
+      color: #fff;
+      text-align: center;
+    }
+  
+    .homeContainer .botao {
+      background-color: #263238;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .cabecalho {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+  
+    .homeContainer .imagem_titulo {
+      max-width: 75%;
+    }
+  
+    .homeModal .fechar_homeModal {
+      width: 30px;
+      line-height: 30px;
+    }
+  }

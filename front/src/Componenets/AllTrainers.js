@@ -15,6 +15,9 @@ export default class Alltrainers extends Component {
     loading: true,
     error: false,
     trainUpdate: null,
+    currentPage: 1,
+    trainersPerPage: 6,
+    showMax: 3,
   };
   showModal = (k) => {
     this.setState({ show: true, trainUpdate: k }, () => {
@@ -97,15 +100,48 @@ export default class Alltrainers extends Component {
     );
   }
 
+  handleClick(num, etat) {
+    if (etat === "normale") {
+      this.setState(
+        {
+          currentPage: Number(num),
+        },
+        () => {}
+      );
+    } else if (etat === "prev") {
+      this.setState(
+        { currentPage: Number(num) - 1 >= 1 ? Number(num) - 1 : Number(num) },
+        () => {}
+      );
+    } else if (etat === "next") {
+      this.setState(
+        {
+          currentPage:
+            Number(num) + 1 <=
+            Math.ceil(this.state.trainers.length / this.state.trainersPerPage)
+              ? Number(num) + 1
+              : Number(num),
+        },
+        () => {}
+      );
+    }
+  }
+
   render() {
-    const { trainers, loading, error, trainUpdate } = this.state;
-    console.log(trainUpdate);
+    const { trainers, loading, error, trainUpdate, showMax } = this.state;
+    const { currentPage, trainersPerPage } = this.state;
+    const indexOfLastTRainer = currentPage * trainersPerPage;
+    const indexOfFirstTRainer = indexOfLastTRainer - trainersPerPage;
+    const currentTrainers = trainers.slice(
+      indexOfFirstTRainer,
+      indexOfLastTRainer
+    );
     return (
       <div>
         <Alert key="info" variant="info">
           <h2> All Trainers </h2>
         </Alert>
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg">
           <Container fluid>
             {loading ? null : (
               <Navbar.Brand href="#">nombre : {trainers.length}</Navbar.Brand>
@@ -146,7 +182,7 @@ export default class Alltrainers extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {trainers.map((trainer, i) => (
+                  {currentTrainers.map((trainer, i) => (
                     <tr key={trainer.id}>
                       <td> {trainer.id}</td>
 
@@ -182,7 +218,13 @@ export default class Alltrainers extends Component {
             <div className="row mt-5">
               <div className="col-md-4 col-md-offset-3"> </div>
               <div className="col-md-6 col-md-offset-3">
-                <Pagination />
+                <Pagination
+                  liste={trainers}
+                  listePerPage={trainersPerPage}
+                  showMax={showMax}
+                  currentPage={currentPage}
+                  handleClick={this.handleClick.bind(this)}
+                ></Pagination>
               </div>
             </div>
             {trainUpdate ? (
