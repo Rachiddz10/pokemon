@@ -88,6 +88,8 @@ export const registerPokemonRoutes = (
     },
   });
 
+
+
   server.route<{
     Body: {
       id: number;
