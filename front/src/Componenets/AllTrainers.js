@@ -9,6 +9,7 @@ import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import UpdateTrainer from "./UpdateTrainer";
 import AddPokemonTrainer from "./AddPokemonTrainer";
+import InfoTrainer from "./InfoTrainer";
 
 export default class Alltrainers extends Component {
   state = {
@@ -157,6 +158,35 @@ export default class Alltrainers extends Component {
     });
   };
 
+  hideModalInfo = () => {
+    this.setState({ showInfo: false, trainUpdate: null }, async () => {
+      try {
+        const response = await fetch("http://localhost:3000/trainers");
+        const json = await response.json();
+        this.setState(
+          {
+            trainers: json,
+            loading: false,
+          },
+          () => {
+            console.log(json);
+          }
+        );
+      } catch (error) {
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      }
+    });
+  };
+
+  showModalInfo = (k) => {
+    this.setState({ showInfo: true, trainUpdate: k }, () => {
+      console.log(this.state.trainUpdate);
+    });
+  };
+
   render() {
     const { trainers, loading, error, trainUpdate, showMax } = this.state;
     const { currentPage, trainersPerPage } = this.state;
@@ -219,7 +249,12 @@ export default class Alltrainers extends Component {
                       <td> {trainer.name}</td>
                       <td>{trainer.gender == "f" ? "Femme" : "Homme"}</td>
                       <td>
-                        <Button variant="outline-info">Info</Button>{" "}
+                        <Button
+                          onClick={this.showModalInfo.bind(this, trainer)}
+                          variant="outline-info"
+                        >
+                          Info
+                        </Button>{" "}
                         <Button
                           onClick={this.showModalPokemon.bind(this, trainer)}
                           variant="outline-primary"
@@ -275,6 +310,11 @@ export default class Alltrainers extends Component {
                   handleHideModal={this.hideModalPokemon.bind(this)}
                   trainer={trainUpdate}
                 ></AddPokemonTrainer>
+                <InfoTrainer
+                  show={this.state.showInfo}
+                  handleHideModal={this.hideModalInfo.bind(this)}
+                  trainer={trainUpdate}
+                ></InfoTrainer>
               </>
             ) : null}
           </div>
