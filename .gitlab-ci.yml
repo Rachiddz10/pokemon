@@ -1,13 +1,23 @@
+image: node
+
+
+services:
+  - postgres:15.1-alpine
+
+variables:
+  POSTGRES_DB: poca-db
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: password
+  DATABASE_URL: 'postgresql://admin:password@postgres:5432/poca-db'
+  POSTGRES_HOST_AUTH_METHOD: trust
+
 stages:
-  - test
+    - test
 
 test:
-  stage: test
-  image: none
-  script:
-    - echo "Testing App"
-    - cd apps/api
-    - yarn install
-    - yarn build
-    - CI=true yarn test
-    - echo "Test successfully!"
+    stage: test
+    script:
+        - cd apps/api
+        - yarn install
+        - yarn db:migrate
+        - yarn test
