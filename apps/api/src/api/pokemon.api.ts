@@ -1,5 +1,9 @@
 import { FastifyInstance, FastifyRequest } from "fastify";
 import { PokemonContainer } from "../domain/pokemon/pokemon.container";
+import {
+  initTrainerContainer,
+  TrainerContainer,
+} from "../domain/trainer/trainer.container";
 
 export const registerPokemonRoutes = (
   server: FastifyInstance,
@@ -92,6 +96,58 @@ export const registerPokemonRoutes = (
 
   server.route<{
     Body: {
+      pokemonIds: number[];
+      trainerId: number;
+    };
+  }>({
+    method: "POST",
+    url: "/pokemons/link",
+    schema: {
+      body: {
+        type: "object",
+        properties: {
+          pokemonIds: { type: "array", items: { type: "number" } },
+          trainerId: { type: "number" },
+        },
+        required: ["pokemonIds", "trainerId"],
+      },
+    },
+    handler: async (request, reply) => {
+      const { pokemonIds, trainerId } = request.body;
+      if (!Array.isArray(pokemonIds) || pokemonIds.length === 0) {
+        reply.status(400).send({ error: "Invalid pokemonIds" });
+        return;
+      }
+
+      if (!trainerId || isNaN(trainerId)) {
+        reply.status(400).send({ error: "Invalid trainerId" });
+        return;
+      }
+      reply.header("Access-Control-Allow-Origin", "*");
+      reply.header("Access-Control-Allow-Headers", "*");
+      reply.header("mode", "no-cors");
+      const pokemon = await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          container.linkPokemonToTrainerUseCase.execute(pokemonId, {
+            trainerId,
+          })
+        )
+      );
+
+      const trainerContainer: TrainerContainer = initTrainerContainer();
+      await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          trainerContainer.addPokemonToTrainerUseCase.execute(trainerId, {
+            pokemonId,
+          })
+        )
+      );
+      reply.status(200).send(pokemon);
+    },
+  });
+
+  server.route<{
+    Body: {
       id: number;
       name: string;
       hp: number;
@@ -169,28 +225,20 @@ export const registerPokemonRoutes = (
     url: "/pokemons/",
 
     handler: async (request, reply) => {
-      const { name, hp, atk, def, atkspe, defspe, speed, type } =
-        request.query as {
-          name?: string;
-          hp?: number;
-          atk?: number;
-          def?: number;
-          atkspe?: number;
-          defspe?: number;
-          speed?: number;
-          type?: string;
-        };
+      const { name, hp, atk, def, atkspe, defspe, speed, type } = request.query as {
+        name?: string;
+        hp?: number;
+        atk?: number;
+        def?: number;
+        atkspe?: number;
+        defspe?: number;
+        speed?: number;
+        type?: string;
 
-      const filteredPokemons = await container.filterPokemonsUsecase.execute(
-        name,
-        hp,
-        atk,
-        def,
-        atkspe,
-        defspe,
-        speed,
-        type
-      );
+
+      };
+
+      const filteredPokemons = await container.filterPokemonsUsecase.execute(name, hp, atk, def, atkspe, defspe, speed, type);
 
       reply.status(200).send(filteredPokemons);
     },

@@ -8,6 +8,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import UpdateTrainer from "./UpdateTrainer";
+import AddPokemonTrainer from "./AddPokemonTrainer";
+import InfoTrainer from "./InfoTrainer";
 
 export default class Alltrainers extends Component {
   state = {
@@ -127,6 +129,64 @@ export default class Alltrainers extends Component {
     }
   }
 
+  hideModalPokemon = () => {
+    this.setState({ showPokemon: false, trainUpdate: null }, async () => {
+      try {
+        const response = await fetch("http://localhost:3000/trainers");
+        const json = await response.json();
+        this.setState(
+          {
+            trainers: json,
+            loading: false,
+          },
+          () => {
+            console.log(json);
+          }
+        );
+      } catch (error) {
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      }
+    });
+  };
+
+  showModalPokemon = (k) => {
+    this.setState({ showPokemon: true, trainUpdate: k }, () => {
+      console.log(this.state.trainUpdate);
+    });
+  };
+
+  hideModalInfo = () => {
+    this.setState({ showInfo: false, trainUpdate: null }, async () => {
+      try {
+        const response = await fetch("http://localhost:3000/trainers");
+        const json = await response.json();
+        this.setState(
+          {
+            trainers: json,
+            loading: false,
+          },
+          () => {
+            console.log(json);
+          }
+        );
+      } catch (error) {
+        this.setState({
+          loading: false,
+          error: true,
+        });
+      }
+    });
+  };
+
+  showModalInfo = (k) => {
+    this.setState({ showInfo: true, trainUpdate: k }, () => {
+      console.log(this.state.trainUpdate);
+    });
+  };
+
   render() {
     const { trainers, loading, error, trainUpdate, showMax } = this.state;
     const { currentPage, trainersPerPage } = this.state;
@@ -189,7 +249,18 @@ export default class Alltrainers extends Component {
                       <td> {trainer.name}</td>
                       <td>{trainer.gender == "f" ? "Femme" : "Homme"}</td>
                       <td>
-                        <Button variant="outline-info">Info</Button>{" "}
+                        <Button
+                          onClick={this.showModalInfo.bind(this, trainer)}
+                          variant="outline-info"
+                        >
+                          Info
+                        </Button>{" "}
+                        <Button
+                          onClick={this.showModalPokemon.bind(this, trainer)}
+                          variant="outline-primary"
+                        >
+                          Add
+                        </Button>{" "}
                         <Button
                           onClick={this.showModal.bind(this, trainer)}
                           variant="outline-success"
@@ -228,11 +299,23 @@ export default class Alltrainers extends Component {
               </div>
             </div>
             {trainUpdate ? (
-              <UpdateTrainer
-                show={this.state.show}
-                handleHideModal={this.hideModal.bind(this)}
-                trainer={trainUpdate}
-              ></UpdateTrainer>
+              <>
+                <UpdateTrainer
+                  show={this.state.show}
+                  handleHideModal={this.hideModal.bind(this)}
+                  trainer={trainUpdate}
+                ></UpdateTrainer>
+                <AddPokemonTrainer
+                  show={this.state.showPokemon}
+                  handleHideModal={this.hideModalPokemon.bind(this)}
+                  trainer={trainUpdate}
+                ></AddPokemonTrainer>
+                <InfoTrainer
+                  show={this.state.showInfo}
+                  handleHideModal={this.hideModalInfo.bind(this)}
+                  trainer={trainUpdate}
+                ></InfoTrainer>
+              </>
             ) : null}
           </div>
         )}
