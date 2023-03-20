@@ -23,7 +23,7 @@ export default class AllPokemons extends Component {
     showMax: 3,
   };
   showModal = (k) => {
-    this.setState({ show: true, pokemonUpdate: k }, () => {
+    this.setState({ show: true, pokemonUpdate: k, pokemonINFO:null }, () => {
       console.log(this.state.pokemonUpdate);
     });
   };
