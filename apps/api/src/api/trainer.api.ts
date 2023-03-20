@@ -1,5 +1,9 @@
 import { FastifyInstance, FastifyRequest } from "fastify";
 import { TrainerContainer } from "../domain/trainer/trainer.container";
+import {
+  initPokemonContainer,
+  PokemonContainer,
+} from "../domain/pokemon/pokemon.container";
 
 export const registerTrainerRoutes = (
   server: FastifyInstance,
@@ -94,22 +98,73 @@ export const registerTrainerRoutes = (
     },
   });
 
+  server.route<{}>({
+    method: "GET",
+    url: "/trainers/",
 
+    handler: async (request, reply) => {
+      const { name, gender } = request.query as {
+        name?: string;
+        gender?: string;
+      };
 
-server.route<{}>({
-  method: "GET",
-  url:  "/trainers/",
+      const filterTrainers = await container.filterTrainersUsecase.execute(
+        name,
+        gender
+      );
 
-  handler: async (request, reply) => {
-    const { name, gender} = request.query as {
-      name?: string;
-      gender?: string;
+      reply.status(200).send(filterTrainers);
+    },
+  });
+  server.route<{
+    Body: {
+      pokemonIds: number[];
     };
+  }>({
+    method: "POST",
+    url: "/trainer/:id/pokemons",
+    schema: {
+      body: {
+        type: "object",
+        properties: {
+          pokemonIds: { type: "array", items: { type: "number" } },
+        },
+        required: ["pokemonIds"],
+      },
+    },
+    handler: async (request, reply) => {
+      const { pokemonIds } = request.body;
+      const params = request.params as { id: string };
+      const trainerId = parseInt(params.id);
+      console.log(trainerId);
+      if (!Array.isArray(pokemonIds) || pokemonIds.length === 0) {
+        reply.status(400).send({ error: "Invalid pokemonIds" });
+        return;
+      }
+      if (!trainerId || isNaN(trainerId)) {
+        reply.status(400).send({ error: "Invalid trainerId" });
+        return;
+      }
+      reply.header("Access-Control-Allow-Origin", "*");
+      reply.header("Access-Control-Allow-Headers", "*");
+      reply.header("mode", "no-cors");
+      const pokemonContainer: PokemonContainer = initPokemonContainer();
+      const pokemon = await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          pokemonContainer.linkPokemonToTrainerUseCase.execute(pokemonId, {
+            trainerId,
+          })
+        )
+      );
 
-    const filterTrainers = await container.filterTrainersUsecase.execute(name, gender);
-
-    reply.status(200).send(filterTrainers);
-  },
-});
-
+      await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          container.addPokemonToTrainerUseCase.execute(trainerId, {
+            pokemonId,
+          })
+        )
+      );
+      reply.status(200).send(pokemon);
+    },
+  });
 };
