@@ -215,7 +215,7 @@ export default class Alltrainers extends Component {
         <Navbar expand="lg">
           <Container fluid>
             {loading ? null : (
-              <Navbar.Brand href="#">nombre : {trainers.length}</Navbar.Brand>
+              <Navbar.Brand>nombre : {trainers.length}</Navbar.Brand>
             )}
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
@@ -258,7 +258,7 @@ export default class Alltrainers extends Component {
                       <td> {trainer.id}</td>
 
                       <td> {trainer.name}</td>
-                      <td>{trainer.gender == "f" ? "Femme" : "Homme"}</td>
+                      <td>{trainer.gender === "f" ? "Femme" : "Homme"}</td>
                       <td>
                         <Button
                           onClick={this.showModalInfo.bind(this, trainer)}

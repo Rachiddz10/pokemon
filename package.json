@@ -4,5 +4,8 @@
   "description": "Project for POCA 2023",
   "main": "index.js",
   "license": "MIT",
-  "author": "Benhammou Mohammed Rachid, Mokhtati Nouhaila, ZZZ etc..."
+  "author": "Benhammou Mohammed Rachid, Mokhtati Nouhaila, ZZZ etc...",
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
 }

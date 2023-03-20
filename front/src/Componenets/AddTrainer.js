@@ -54,11 +54,11 @@ export default class AddTrainer extends Component {
   handleChange(event) {
     var nm = event.target.name;
     var v = event.target.value;
-    if (nm == "name") {
+    if (nm === "name") {
       this.setState({ name: v }, () => {
         console.log(this.state);
       });
-    } else if (nm == "gender") {
+    } else if (nm === "gender") {
       this.setState({ gender: v }, () => {
         console.log(this.state);
       });
@@ -66,7 +66,6 @@ export default class AddTrainer extends Component {
   }
 
   render() {
-    const { trainers, loading, error } = this.state;
     return (
       <>
         <Alert key="info" variant="info">
@@ -117,9 +116,7 @@ export default class AddTrainer extends Component {
               </div>
               <div className=" d-flex flex-column text-center px-5 mt-3 mb-3">
                 <small className="agree-text"> </small>
-                <a href="#" className="terms">
-                  {" "}
-                </a>{" "}
+                <div className="terms"> </div>{" "}
               </div>{" "}
               <button className="btn btn-info btn-block confirm-button">
                 Add

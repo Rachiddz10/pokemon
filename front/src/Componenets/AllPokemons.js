@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Pagination from "./../Comps/Pagination";
 import Form from "react-bootstrap/Form";
@@ -186,7 +185,7 @@ export default class AllPokemons extends Component {
         <Navbar expand="lg">
           <Container fluid>
             {loading ? null : (
-              <Navbar.Brand href="#">nombre : {pokemons.length}</Navbar.Brand>
+              <Navbar.Brand>nombre : {pokemons.length}</Navbar.Brand>
             )}
 
             <Navbar.Toggle aria-controls="navbarScroll" />
@@ -201,7 +200,6 @@ export default class AllPokemons extends Component {
 
               <DropdownButton id="dropdown-basic-button">
                 <Dropdown.Item
-                  href="#"
                   onClick={() => {
                     this.setState({ search: "?name=" });
                   }}
@@ -209,7 +207,6 @@ export default class AllPokemons extends Component {
                   NAME
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#"
                   onClick={() => {
                     this.setState({ search: "?hp=" });
                   }}
@@ -217,7 +214,6 @@ export default class AllPokemons extends Component {
                   HP
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#"
                   onClick={() => {
                     this.setState({ search: "?atk=" });
                   }}
@@ -225,7 +221,6 @@ export default class AllPokemons extends Component {
                   ATK
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#"
                   onClick={() => {
                     this.setState({ search: "?def=" });
                   }}
@@ -233,7 +228,6 @@ export default class AllPokemons extends Component {
                   DEF
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#"
                   onClick={() => {
                     this.setState({ search: "?atkspe=" });
                   }}
@@ -241,7 +235,6 @@ export default class AllPokemons extends Component {
                   SP.ATK
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#"
                   onClick={() => {
                     this.setState({ search: "?defspe=" });
                   }}
@@ -249,7 +242,6 @@ export default class AllPokemons extends Component {
                   SP.DEF
                 </Dropdown.Item>
                 <Dropdown.Item
-                  href="#"
                   onClick={() => {
                     this.setState({ search: "?speed=" });
                   }}
@@ -266,7 +258,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.bugLogo} width="20"></img>
+                  <img className="" src={TYPES.bugLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -275,7 +267,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.darkLogo} width="20"></img>
+                  <img className="" src={TYPES.darkLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -284,7 +276,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.dragonLogo} width="20"></img>
+                  <img className="" src={TYPES.dragonLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -293,7 +285,12 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.electricLogo} width="20"></img>
+                  <img
+                    className=""
+                    src={TYPES.electricLogo}
+                    width="20"
+                    alt=""
+                  />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -302,7 +299,12 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.fightingLogo} width="20"></img>
+                  <img
+                    className=""
+                    src={TYPES.fightingLogo}
+                    width="20"
+                    alt=""
+                  />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -311,7 +313,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.fireLogo} width="20"></img>
+                  <img className="" src={TYPES.fireLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -320,7 +322,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.flyingLogo} width="20"></img>
+                  <img className="" src={TYPES.flyingLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -329,7 +331,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.ghostLogo} width="20"></img>
+                  <img className="" src={TYPES.ghostLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -338,7 +340,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.grassLogo} width="20"></img>
+                  <img className="" src={TYPES.grassLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -347,7 +349,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.groundLogo} width="20"></img>
+                  <img className="" src={TYPES.groundLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -356,7 +358,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.iceLogo} width="20"></img>
+                  <img className="" src={TYPES.iceLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -365,7 +367,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.normalLogo} width="20"></img>
+                  <img className="" src={TYPES.normalLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -374,7 +376,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.poisonLogo} width="20"></img>
+                  <img className="" src={TYPES.poisonLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -383,7 +385,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.psychicLogo} width="20"></img>
+                  <img className="" src={TYPES.psychicLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -392,7 +394,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.rockLogo} width="20"></img>
+                  <img className="" src={TYPES.rockLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -401,7 +403,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.steelLogo} width="20"></img>
+                  <img className="" src={TYPES.steelLogo} width="20" alt="" />
                 </button>
                 <button
                   className="btn-sm btn-outline-secondary rounded-0"
@@ -410,7 +412,7 @@ export default class AllPokemons extends Component {
                     this.Search();
                   }}
                 >
-                  <img className="" src={TYPES.waterLogo} width="20"></img>
+                  <img className="" src={TYPES.waterLogo} width="20" alt="" />
                 </button>
               </div>
 
@@ -451,7 +453,7 @@ export default class AllPokemons extends Component {
                         <img
                           class="card-img-top"
                           src={pokemon.image}
-                          alt="Card image cap"
+                          alt="Card cap"
                           text
                         />
                         <div class="">

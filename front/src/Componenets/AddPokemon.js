@@ -3,13 +3,13 @@ import Axios from "axios";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 const initialState = {
   trainers: [],
-  loading: true,
   error: false,
   name: "",
   pkmName: "",
@@ -82,7 +82,7 @@ export default class AddPokemon extends Component {
   handleChange(event) {
     var nm = event.target.name;
     var v = event.target.value;
-    if (nm == "name") {
+    if (nm === "name") {
       this.setState({ name: v }, () => {
         console.log(this.state);
       });
@@ -154,7 +154,6 @@ export default class AddPokemon extends Component {
   };
 
   render() {
-    const { trainers, loading, error } = this.state;
     return (
       <>
         <Alert key="info" variant="info">
@@ -166,7 +165,7 @@ export default class AddPokemon extends Component {
             <div className="col d-flex align-items-stretch">
               <div className="card px-1 py-4 h-100">
                 <form className="card-body d-flex flex-column">
-                  <h3 className="card-title text-center"></h3>
+                  <h3 className="card-title text-center">&nbsp;</h3>
                   <input
                     name="name"
                     onChange={(event) =>
@@ -207,6 +206,7 @@ export default class AddPokemon extends Component {
                         <img
                           src={this.state.img}
                           className="rounded mx-auto d-block img-fluid"
+                          alt=""
                         />
                         <h6 className="text-center">HP: {this.state.hp}</h6>
                         <h6 className="text-center">ATK: {this.state.atk}</h6>

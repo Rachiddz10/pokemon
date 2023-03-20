@@ -39,7 +39,7 @@ export default class InfoTrainer extends Component {
       },
       () => {
         let tab = [];
-        const total = this.state.checkedState.map((currentState, index) => {
+        this.state.checkedState.forEach((currentState, index) => {
           if (currentState === true) {
             tab.push(this.state.pokemons[index].id);
           }
@@ -180,7 +180,7 @@ export default class InfoTrainer extends Component {
                                   <img
                                     className="card-img-top"
                                     src={pokemon.image}
-                                    alt="Card image cap"
+                                    alt="Card cap"
                                     text
                                   />
                                   <div className="">
