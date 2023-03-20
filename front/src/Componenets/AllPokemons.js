@@ -32,7 +32,9 @@ export default class AllPokemons extends Component {
   hideModal = () => {
     this.setState({ show: false, pokemonUpdate: null }, async () => {
       try {
-        const response = await fetch("http://localhost:3000/pokemons");
+        const response = await fetch(
+          "https://pokemon-production-6166.up.railway.app/pokemons"
+        );
         const json = await response.json();
         this.setState(
           {
@@ -53,7 +55,9 @@ export default class AllPokemons extends Component {
   };
   async componentDidMount() {
     try {
-      const response = await fetch("http://localhost:3000/pokemons");
+      const response = await fetch(
+        "https://pokemon-production-6166.up.railway.app/pokemons"
+      );
       const json = await response.json();
       this.setState(
         {
@@ -80,7 +84,7 @@ export default class AllPokemons extends Component {
       async () => {
         try {
           const response = await fetch(
-            "http://localhost:3000/pokemons/" +
+            "https://pokemon-production-6166.up.railway.app/pokemons/" +
               this.state.search +
               this.state.textInput,
             { method: "GET" }
@@ -110,9 +114,12 @@ export default class AllPokemons extends Component {
       },
       async () => {
         try {
-          const response = await fetch("http://localhost:3000/pokemons/" + id, {
-            method: "DELETE",
-          });
+          const response = await fetch(
+            "https://pokemon-production-6166.up.railway.app/pokemons/" + id,
+            {
+              method: "DELETE",
+            }
+          );
           const json = await response.json();
           this.setState(
             {
