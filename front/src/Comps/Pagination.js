@@ -28,8 +28,8 @@ export default class UpdateTrainer extends Component {
       } else {
         startPage = this.props.currentPage;
         if (
-          startPage != pageNumbers.length &&
-          startPage + 1 != pageNumbers.length
+          startPage !== pageNumbers.length &&
+          startPage + 1 !== pageNumbers.length
         ) {
           endPage = this.props.currentPage + showMax - 1;
         } else {
@@ -45,9 +45,8 @@ export default class UpdateTrainer extends Component {
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item">
-              <a
+              <div
                 class="page-link"
-                href="#"
                 aria-label="Previous"
                 onClick={this.props.handleClick.bind(
                   this,
@@ -56,7 +55,7 @@ export default class UpdateTrainer extends Component {
                 )}
               >
                 <span aria-hidden="true">&laquo;</span>
-              </a>
+              </div>
             </li>
             {paginationNumbers.map((num) => (
               <li
@@ -65,25 +64,22 @@ export default class UpdateTrainer extends Component {
                 id={num}
                 onClick={this.props.handleClick.bind(this, num, "normale")}
               >
-                <a class="page-link" href="#">
-                  {num}
-                </a>
+                <div class="page-link">{num}</div>
               </li>
             ))}
 
             <li class="page-item">
-              <a
+              <div
                 class="page-link"
                 onClick={this.props.handleClick.bind(
                   this,
                   this.props.currentPage,
                   "next"
                 )}
-                href="#"
                 aria-label="Next"
               >
                 <span aria-hidden="true">&raquo;</span>
-              </a>
+              </div>
             </li>
           </ul>
         </nav>{" "}

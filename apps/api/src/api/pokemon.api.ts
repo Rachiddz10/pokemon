@@ -92,6 +92,8 @@ export const registerPokemonRoutes = (
     },
   });
 
+
+
   server.route<{
     Body: {
       pokemonIds: number[];
