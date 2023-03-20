@@ -167,4 +167,55 @@ export const registerTrainerRoutes = (
       reply.status(200).send(pokemon);
     },
   });
+  server.route<{
+    Body: {
+      pokemonIds: number[];
+    };
+  }>({
+    method: "POST",
+    url: "/trainer/:id/pokemonsNo",
+    schema: {
+      body: {
+        type: "object",
+        properties: {
+          pokemonIds: { type: "array", items: { type: "number" } },
+        },
+        required: ["pokemonIds"],
+      },
+    },
+    handler: async (request, reply) => {
+      const { pokemonIds } = request.body;
+      const params = request.params as { id: string };
+      const trainerId = parseInt(params.id);
+      console.log(trainerId);
+      if (!Array.isArray(pokemonIds) || pokemonIds.length === 0) {
+        reply.status(400).send({ error: "Invalid pokemonIds" });
+        return;
+      }
+      if (!trainerId || isNaN(trainerId)) {
+        reply.status(400).send({ error: "Invalid trainerId" });
+        return;
+      }
+      reply.header("Access-Control-Allow-Origin", "*");
+      reply.header("Access-Control-Allow-Headers", "*");
+      reply.header("mode", "no-cors");
+      const pokemonContainer: PokemonContainer = initPokemonContainer();
+      const pokemon = await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          pokemonContainer.unlinkPokemonToTrainerUseCase.execute(pokemonId, {
+            trainerId,
+          })
+        )
+      );
+
+      await Promise.all(
+        pokemonIds.map((pokemonId) =>
+          container.noaddPokemonToTrainerUseCase.execute(trainerId, {
+            pokemonId,
+          })
+        )
+      );
+      reply.status(200).send(pokemon);
+    },
+  });
 };
