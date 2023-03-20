@@ -56,7 +56,9 @@ export default class AddPokemonTrainer extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     fetch(
-      "http://localhost:3000/trainer/" + this.state.trainerId + "/pokemons",
+      "https://pokemon-production-6166.up.railway.app/trainer/" +
+        this.state.trainerId +
+        "/pokemons",
       {
         method: "POST",
         headers: {
@@ -87,7 +89,9 @@ export default class AddPokemonTrainer extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch("http://localhost:3000/pokemons");
+      const response = await fetch(
+        "https://pokemon-production-6166.up.railway.app/okemons"
+      );
       const json = await response.json();
       console.log("json");
 

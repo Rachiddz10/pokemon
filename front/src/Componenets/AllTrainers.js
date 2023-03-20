@@ -30,7 +30,9 @@ export default class Alltrainers extends Component {
   hideModal = () => {
     this.setState({ show: false, trainUpdate: null }, async () => {
       try {
-        const response = await fetch("http://localhost:3000/trainers");
+        const response = await fetch(
+          "https://pokemon-production-6166.up.railway.app/trainers"
+        );
         const json = await response.json();
         this.setState(
           {
@@ -51,7 +53,9 @@ export default class Alltrainers extends Component {
   };
   async componentDidMount() {
     try {
-      const response = await fetch("http://localhost:3000/trainers");
+      const response = await fetch(
+        "https://pokemon-production-6166.up.railway.app/trainers"
+      );
       const json = await response.json();
       this.setState(
         {
@@ -78,9 +82,12 @@ export default class Alltrainers extends Component {
       },
       async () => {
         try {
-          const response = await fetch("http://localhost:3000/trainers/" + id, {
-            method: "DELETE",
-          });
+          const response = await fetch(
+            "https://pokemon-production-6166.up.railway.app/trainers/" + id,
+            {
+              method: "DELETE",
+            }
+          );
           const json = await response.json();
           this.setState(
             {
@@ -132,7 +139,9 @@ export default class Alltrainers extends Component {
   hideModalPokemon = () => {
     this.setState({ showPokemon: false, trainUpdate: null }, async () => {
       try {
-        const response = await fetch("http://localhost:3000/trainers");
+        const response = await fetch(
+          "https://pokemon-production-6166.up.railway.app/trainers"
+        );
         const json = await response.json();
         this.setState(
           {
@@ -161,7 +170,9 @@ export default class Alltrainers extends Component {
   hideModalInfo = () => {
     this.setState({ showInfo: false, trainUpdate: null }, async () => {
       try {
-        const response = await fetch("http://localhost:3000/trainers");
+        const response = await fetch(
+          "https://pokemon-production-6166.up.railway.app/trainers"
+        );
         const json = await response.json();
         this.setState(
           {

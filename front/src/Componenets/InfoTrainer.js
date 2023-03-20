@@ -56,7 +56,9 @@ export default class InfoTrainer extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     fetch(
-      "http://localhost:3000/trainer/" + this.state.trainerId + "/pokemonsNo",
+      "https://pokemon-production-6166.up.railway.app/trainer/" +
+        this.state.trainerId +
+        "/pokemonsNo",
       {
         method: "POST",
         headers: {
@@ -87,7 +89,9 @@ export default class InfoTrainer extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch("http://localhost:3000/pokemons");
+      const response = await fetch(
+        "https://pokemon-production-6166.up.railway.app/pokemons"
+      );
       const json = await response.json();
       console.log("json");
 
