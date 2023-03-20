@@ -55,18 +55,21 @@ export default class AddPokemonTrainer extends Component {
   }
   handleSubmit = async (e) => {
     e.preventDefault();
-
-    fetch("https://pokemon-production-6166.up.railway.app/pokemons/link", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        mode: "no-cors",
-      },
-      body: JSON.stringify({
-        pokemonIds: this.state.pokemonIds,
-        trainerId: this.state.trainerId,
-      }),
-    })
+    fetch(
+      "https://pokemon-production-6166.up.railway.app/trainer/" +
+        this.state.trainerId +
+        "/pokemons",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          mode: "no-cors",
+        },
+        body: JSON.stringify({
+          pokemonIds: this.state.pokemonIds,
+        }),
+      }
+    )
       .then((response) => {
         if (response.ok) {
           console.log(this.state);

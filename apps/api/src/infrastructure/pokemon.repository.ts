@@ -43,7 +43,7 @@ export class PokemonRepository implements IPokemonRepository {
       where: {
         name: {
           equals: name,
-          mode: 'insensitive',
+          mode: "insensitive",
         },
       },
     });
@@ -55,7 +55,7 @@ export class PokemonRepository implements IPokemonRepository {
       where: {
         type: {
           equals: type,
-          mode: 'insensitive',
+          mode: "insensitive",
         },
       },
     });
@@ -85,8 +85,6 @@ export class PokemonRepository implements IPokemonRepository {
     });
     return pokemons;
   }
-
-
 
   async findByatkspe(atke: number): Promise<Pokemon[]> {
     const parsedatk = parseInt(atke.toString());
@@ -191,6 +189,13 @@ export class PokemonRepository implements IPokemonRepository {
 
     return pokemons;
   }
-
-
+  async unlinkPokemonToTrainer(id: number): Promise<Pokemon> {
+    const linkPokemonTrainer = await prisma.pokemon.update({
+      where: { id },
+      data: {
+        trainerId: null,
+      },
+    });
+    return linkPokemonTrainer;
+  }
 }

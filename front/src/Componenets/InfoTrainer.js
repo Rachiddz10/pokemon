@@ -55,6 +55,36 @@ export default class InfoTrainer extends Component {
   }
   handleSubmit = async (e) => {
     e.preventDefault();
+    fetch(
+      "https://pokemon-production-6166.up.railway.app/trainer/" +
+        this.state.trainerId +
+        "/pokemonsNo",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          mode: "no-cors",
+        },
+        body: JSON.stringify({
+          pokemonIds: this.state.pokemonIds,
+        }),
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          console.log(this.state);
+          this.props.handleHideModal();
+
+          return response.json();
+        } else {
+          throw new Error("Something went wrong ...");
+        }
+      })
+      .catch((error) =>
+        this.setState({ error }, () => {
+          console.log(error);
+        })
+      );
   };
 
   async componentDidMount() {
@@ -216,7 +246,7 @@ export default class InfoTrainer extends Component {
                 </div>
               </Form.Group>
 
-              <Button variant="primary" type="submit" disabled>
+              <Button variant="primary" type="submit">
                 Supprimer
               </Button>
             </Form>
