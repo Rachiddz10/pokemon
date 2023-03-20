@@ -56,7 +56,7 @@ export default class AddPokemonTrainer extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/pokemons/link", {
+    fetch("https://pokemon-production-6166.up.railway.app/pokemons/link", {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -86,7 +86,9 @@ export default class AddPokemonTrainer extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch("http://localhost:3000/pokemons");
+      const response = await fetch(
+        "https://pokemon-production-6166.up.railway.app/pokemons"
+      );
       const json = await response.json();
       console.log("json");
 

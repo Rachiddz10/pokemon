@@ -1,6 +1,8 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 import Axios from "axios";
 import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -40,7 +42,7 @@ export default class AddPokemon extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     console.log("okokok");
-    fetch("http://localhost:3000/pokemons", {
+    fetch("https://pokemon-production-6166.up.railway.app/pokemons", {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -84,11 +86,11 @@ export default class AddPokemon extends Component {
       this.setState({ name: v }, () => {
         console.log(this.state);
       });
-    } else if (nm === "ability") {
+    } else if (nm == "ability") {
       this.setState({ ability: v }, () => {
         console.log(this.state);
       });
-    } else if (nm === "force") {
+    } else if (nm == "force") {
       this.setState({ force: v }, () => {
         console.log(this.state);
       });
@@ -115,7 +117,7 @@ export default class AddPokemon extends Component {
   }
 
   addPKM = async function (e) {
-    fetch("http://localhost:3000/pokemons", {
+    fetch("https://pokemon-production-6166.up.railway.app/pokemons", {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -176,7 +178,9 @@ export default class AddPokemon extends Component {
                   />
                   <div className=" d-flex flex-column text-center px-5 mt-3 mb-3">
                     <small className="agree-text"> </small>
-                    <div className="terms"> </div>
+                    <a href="#" className="terms">
+                      {" "}
+                    </a>
                   </div>
                   <button
                     className="btn btn-info btn-block confirm-button mt-auto"

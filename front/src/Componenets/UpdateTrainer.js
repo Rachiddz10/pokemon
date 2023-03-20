@@ -26,16 +26,19 @@ export default class UpdateTrainer extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     console.log(this.props.trainer.id);
-    await fetch(`http://localhost:3000/trainers/${this.props.trainer.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        gender: this.state.gender,
-      }),
-    }).then(async (response) => {
+    await fetch(
+      `https://pokemon-production-6166.up.railway.app/trainers/${this.props.trainer.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({
+          name: this.state.name,
+          gender: this.state.gender,
+        }),
+      }
+    ).then(async (response) => {
       if (response.ok) {
         this.props.handleHideModal();
         const json = await response.json();

@@ -19,7 +19,7 @@ export default class AddTrainer extends Component {
     e.preventDefault();
     console.log("okokok");
 
-    fetch("http://localhost:3000/trainers", {
+    fetch("https://pokemon-production-6166.up.railway.app/trainers", {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
