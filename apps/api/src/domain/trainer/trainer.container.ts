@@ -5,6 +5,7 @@ import { UpdateTrainerUsecase } from "./update-trainer.usecase";
 import { DeleteTrainerUsecase } from "./delete-trainer.usecase";
 import { AddPokemonToTrainerUseCase } from "./add-pokemon-to-trainer.usecase";
 import { FilterTrainersUsecase } from "./filter-trainers.usecase";
+import { NoAddPokemonToTrainerUseCase } from "./noadd-pokemon-to-trainer.usecase";
 
 export type TrainerContainer = {
   createTrainerUsecase: CreateTrainerUsecase;
@@ -13,6 +14,7 @@ export type TrainerContainer = {
   deleteTrainersUsecase: DeleteTrainerUsecase;
   addPokemonToTrainerUseCase: AddPokemonToTrainerUseCase;
   filterTrainersUsecase: FilterTrainersUsecase;
+  noaddPokemonToTrainerUseCase: NoAddPokemonToTrainerUseCase;
 };
 
 export const initTrainerContainer = (): TrainerContainer => {
@@ -25,6 +27,9 @@ export const initTrainerContainer = (): TrainerContainer => {
     trainerRepository
   );
   const filterTrainersUsecase = new FilterTrainersUsecase(trainerRepository);
+  const noaddPokemonToTrainerUseCase = new NoAddPokemonToTrainerUseCase(
+    trainerRepository
+  );
 
   return {
     createTrainerUsecase,
@@ -33,5 +38,6 @@ export const initTrainerContainer = (): TrainerContainer => {
     deleteTrainersUsecase,
     addPokemonToTrainerUseCase,
     filterTrainersUsecase,
+    noaddPokemonToTrainerUseCase,
   };
 };

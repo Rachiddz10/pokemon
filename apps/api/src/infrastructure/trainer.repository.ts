@@ -69,7 +69,7 @@ export class TrainerRepository implements ITrainerRepository {
       where: {
         gender: {
           equals: gender,
-          mode: 'insensitive',
+          mode: "insensitive",
         },
       },
     });
@@ -81,10 +81,25 @@ export class TrainerRepository implements ITrainerRepository {
       where: {
         name: {
           equals: name,
-          mode: 'insensitive',
+          mode: "insensitive",
         },
       },
     });
     return trainers;
+  }
+  async noaddPokemonToTrainer(
+    id: number,
+    trainer: { pokemonId: number }
+  ): Promise<Trainer> {
+    const addPokemonTrainer = await prisma.trainer.update({
+      where: { id },
+      data: {
+        pokemons: {
+          disconnect: { id: trainer.pokemonId },
+        },
+      },
+      include: { pokemons: true },
+    });
+    return addPokemonTrainer;
   }
 }

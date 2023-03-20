@@ -13,7 +13,7 @@ export default class AddTrainer extends Component {
     loading: true,
     error: false,
     name: "",
-    gender: "M",
+    gender: "m",
   };
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +85,7 @@ export default class AddTrainer extends Component {
                     type="radio"
                     name="gender"
                     value="F"
-                    checked={this.state.gender == "F"}
+                    checked={this.state.gender == "f"}
                   />{" "}
                   <span> F </span>{" "}
                 </label>
@@ -95,7 +95,7 @@ export default class AddTrainer extends Component {
                     type="radio"
                     name="gender"
                     value="M"
-                    checked={this.state.gender == "M"}
+                    checked={this.state.gender == "m"}
                   />{" "}
                   <span> M </span>{" "}
                 </label>{" "}
