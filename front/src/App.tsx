@@ -1,21 +1,19 @@
-import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavBar from '../src/Comps/NavBar';
- 
-import AllTrainers from './Componenets/AllTrainers';
-import AllPokemons from './Componenets/AllPokemons';
- import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
-import {useParams} from 'react-router-dom';
-import PageHome from './Componenets/PageHome';
-import AddTrainer from './Componenets/AddTrainer';
-import AddPokemon from './Componenets/AddPokemon';
-import UpdateTrainer from './Componenets/UpdateTrainer';
-import UpdatePokemon from './Componenets/UpdatePokemon';
- function App() {
+import NavBar from "../src/Comps/NavBar";
+
+import AllTrainers from "./Componenets/AllTrainers";
+import AllPokemons from "./Componenets/AllPokemons";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PageHome from "./Componenets/PageHome";
+import AddTrainer from "./Componenets/AddTrainer";
+import AddPokemon from "./Componenets/AddPokemon";
+import UpdateTrainer from "./Componenets/UpdateTrainer";
+import UpdatePokemon from "./Componenets/UpdatePokemon";
+function App() {
   return (
     <Router>
       <div>
-      <NavBar/>
+        <NavBar />
         {/* 👇️ Wrap your Route components in a Routes component */}
         <Routes>
           <Route path="/Trainers" element={<AllTrainers />} />
