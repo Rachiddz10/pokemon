@@ -84,7 +84,7 @@ export default class AddTrainer extends Component {
                     onChange={this.handleChange}
                     type="radio"
                     name="gender"
-                    value="F"
+                    value="f"
                     checked={this.state.gender == "f"}
                   />{" "}
                   <span> F </span>{" "}
@@ -94,7 +94,7 @@ export default class AddTrainer extends Component {
                     onChange={this.handleChange}
                     type="radio"
                     name="gender"
-                    value="M"
+                    value="m"
                     checked={this.state.gender == "m"}
                   />{" "}
                   <span> M </span>{" "}
